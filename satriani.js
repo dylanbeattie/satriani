@@ -9,6 +9,9 @@ module.exports = {
         var tokens = tokenizer.Tokenize(stream);
         var ast = parser.parse(tokens);
         var g = new environment.Environment();
+        var result = "";
+        g.output = (...args) => result += args + "\n";
         g.run(ast);
+        return result;
     }
 };

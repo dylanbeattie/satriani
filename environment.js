@@ -5,6 +5,7 @@ module.exports = {
 function Environment(parent) {
     this.vars = Object.create(parent ? parent.vars : null);
     this.parent = parent;
+    this.output = console.log;
 }
 
 Environment.prototype = {
@@ -58,7 +59,7 @@ Environment.prototype = {
              return val;
          case "output":
              var result = evaluate(exp.args, env);
-             console.log(result);
+             env.output(result);
              return;
      }
  }

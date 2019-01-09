@@ -1,0 +1,28 @@
+{
+  "name": "satriani",
+  "version": "1.0.0",
+  "description": "JS interpreter for Rockstar",
+  "main": "satriani.js",
+  "directories": {
+    "test": "tests"
+  },
+  "dependencies": {
+    "chai": "^4.2.0"
+  },
+  "devDependencies": {
+    "mocha": "^5.2.0"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dylanbeattie/satriani.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dylanbeattie/satriani/issues"
+  },
+  "homepage": "https://github.com/dylanbeattie/satriani#readme"
+}

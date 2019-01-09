@@ -47,10 +47,10 @@ Environment.prototype = {
          case "str":
          case "bool":
              return exp.value;
-         // case "binary":
-         //     return apply_op(exp.operator,
-         //         this.evaluate(exp.left),
-         //         this.evaluate(exp.right));
+         case "binary":
+             return apply_op(exp.operator,
+                 evaluate(exp.left, env),
+                 evaluate(exp.right, env));
          case "prog":
              var val = false;
              exp.prog.forEach(function (exp) {
@@ -63,32 +63,32 @@ Environment.prototype = {
              return;
      }
  }
-//
-// function apply_op(op, a, b) {
-//     function num(x) {
-//         if (typeof x != "number")
-//             throw new Error("Expected number but got " + x);
-//         return x;
-//     }
-//     function div(x) {
-//         if (num(x) == 0)
-//             throw new Error("Divide by zero");
-//         return x;
-//     }
-//     switch (op) {
-//         case "+": return num(a) + num(b);
-//         case "-": return num(a) - num(b);
-//         case "*": return num(a) * num(b);
-//         case "/": return num(a) / div(b);
-//         case "%": return num(a) % div(b);
-//         case "&&": return a !== false && b;
-//         case "||": return a !== false ? a : b;
-//         case "<": return num(a) < num(b);
-//         case ">": return num(a) > num(b);
-//         case "<=": return num(a) <= num(b);
-//         case ">=": return num(a) >= num(b);
-//         case "==": return a === b;
-//         case "!=": return a !== b;
-//     }
-//     throw new Error("Can't apply operator " + op);
-// }
+
+function apply_op(op, a, b) {
+    function num(x) {
+        if (typeof x != "number")
+            throw new Error("Expected number but got " + x);
+        return x;
+    }
+    function div(x) {
+        if (num(x) == 0)
+            throw new Error("Divide by zero");
+        return x;
+    }
+    switch (op) {
+        case "+": return num(a) + num(b);
+        case "-": return num(a) - num(b);
+        case "*": return num(a) * num(b);
+        case "/": return num(a) / div(b);
+        case "%": return num(a) % div(b);
+        case "&&": return a !== false && b;
+        case "||": return a !== false ? a : b;
+        case "<": return num(a) < num(b);
+        case ">": return num(a) > num(b);
+        case "<=": return num(a) <= num(b);
+        case ">=": return num(a) >= num(b);
+        case "==": return a === b;
+        case "!=": return a !== b;
+    }
+    throw new Error("Can't apply operator " + op);
+}

@@ -6,7 +6,11 @@ var path = require('path');
 const fs = require('fs');
 var satriani = require('../satriani.js');
 
-test_directory('test/fixtures/io');
+var fixtures = fs.readdirSync('test/fixtures');
+
+fixtures.forEach(fixture => {
+    test_directory(path.join('test/fixtures/', fixture));
+});
 
 function test_directory(directory) {
     describe(directory, function () {

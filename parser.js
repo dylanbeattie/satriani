@@ -146,7 +146,7 @@ module.exports = {
             var prog = [];
             while (!input.eof()) {
                 prog.push(parse_expression());
-                if (!input.eof()) skip_punc(";");
+                // if (!input.eof()) skip_punc(";");
             }
             return { type: "prog", prog: prog };
         }

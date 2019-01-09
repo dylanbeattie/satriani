@@ -8,8 +8,11 @@ var satriani = require('../satriani.js');
 
 var fixtures = fs.readdirSync('test/fixtures');
 
-fixtures.forEach(fixture => {
-    test_directory(path.join('test/fixtures/', fixture));
+describe('feature tests', function() {
+    var fixtures = fs.readdirSync('test/fixtures');
+    fixtures.forEach(fixture => {
+        test_directory(path.join('test/fixtures/', fixture));
+    });
 });
 
 function test_directory(directory) {

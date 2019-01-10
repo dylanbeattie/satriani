@@ -1,7 +1,7 @@
 module.exports = {
     Tokenize: function (input) {
-        var current = null;
-        var keywords = ['say'];
+        let current = null;
+        const keywords = ['say'];
         return {
             next: next,
             peek: peek,
@@ -21,13 +21,13 @@ module.exports = {
             return " \t\n".indexOf(ch) >= 0;
         }
         function read_while(predicate) {
-            var str = "";
+            let str = "";
             while (!input.eof() && predicate(input.peek())) str += input.next();
             return str;
         }
         function read_number() {
-            var has_dot = false;
-            var number = read_while(function (ch) {
+            let has_dot = false;
+            const number = read_while(function (ch) {
                 if (ch == ".") {
                     if (has_dot) return false;
                     has_dot = true;
@@ -39,7 +39,7 @@ module.exports = {
         }
 
         function read_ident() {
-            var id = read_while(is_id);
+            const id = read_while(is_id);
             return {
                 type: is_keyword(id) ? "kw" : "var",
                 value: id
@@ -62,7 +62,7 @@ module.exports = {
 
         function read_string() {
             input.next();
-            var s = read_while(is_not_quote);
+            let s = read_while(is_not_quote);
             input.next();
             return {
                 type: "str",
@@ -73,7 +73,7 @@ module.exports = {
         function read_next() {
             read_while(is_whitespace);
             if (input.eof()) return null;
-            var ch = input.peek();
+            const ch = input.peek();
             if (is_digit(ch)) return read_number();
             if (is_id_start(ch)) return read_ident();
             if (is_quote(ch)) return read_string();
@@ -87,9 +87,9 @@ module.exports = {
             return current || (current = read_next());
         }
         function next() {
-            var tok = current;
+            let tok = current;
             current = null;
-            var result = tok || read_next();
+            let result = tok || read_next();
             return result;
         }
         function eof() {

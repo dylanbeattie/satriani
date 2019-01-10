@@ -15,7 +15,7 @@ describe('streamer', function() {
     it('supports next', function() {
         let stream = streamer.Stream("12345");
         assert.equal("1", stream.next());
-        assert.equal("2", stream.next());ßß
+        assert.equal("2", stream.next());
         assert.equal("3", stream.next());
         assert.equal("4", stream.next());
         assert.equal("5", stream.next());

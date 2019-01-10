@@ -1,7 +1,7 @@
 module.exports = {
     Tokenize: function (input) {
         var current = null;
-        var keywords = ['say', 'is'];
+        var keywords = ['say'];
         return {
             next: next,
             peek: peek,

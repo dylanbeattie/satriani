@@ -1,6 +1,9 @@
+// streamer.js: input stream for Satriani Rockstar parser
+// Based on code by Mihai Bazon / http://lisperator.net/pltut/
+
 module.exports = {
-    InputStream: function (input) {
-        var pos = 0, line = 1, col = 0;
+    Stream: function (input) {
+        let pos = 0, line = 1, col = 0;
         return {
             next: next,
             peek: peek,
@@ -8,8 +11,13 @@ module.exports = {
             croak: croak,
         };
         function next() {
-            var ch = input.charAt(pos++);
-            if (ch == "\n") line++ , col = 0; else col++;
+            let ch = input.charAt(pos++);
+            if (ch == "\n") {
+                line++;
+                col = 0;
+            } else {
+                col++;
+            }
             return ch;
         }
         function peek() {

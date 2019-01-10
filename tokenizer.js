@@ -1,6 +1,13 @@
 module.exports = {
     Tokenize: function (input) {
         let current = null;
+        const OPERATOR_ALIASES = {
+            '+' : ['with','plus'],
+            '-' : ['minus', 'without'],
+            '*' : ['times', 'of'],
+            '/' : ['over']
+        }
+
         const keywords = ['say'];
         return {
             next: next,
@@ -17,6 +24,14 @@ module.exports = {
         function is_op_char(ch) {
             return "+-*/".indexOf(ch) >= 0;
         }
+
+        function dealias_operator(id) {
+            for(var op in OPERATOR_ALIASES) {
+                if (OPERATOR_ALIASES[op].indexOf(id) >= 0) return(op);
+            }
+            return(null);
+        }
+
         function is_whitespace(ch) {
             return " \t\n".indexOf(ch) >= 0;
         }
@@ -40,6 +55,11 @@ module.exports = {
 
         function read_ident() {
             const id = read_while(is_id);
+            let op = dealias_operator(id);
+            if (op) return {
+                type: "op",
+                value: op
+            };
             return {
                 type: is_keyword(id) ? "kw" : "var",
                 value: id

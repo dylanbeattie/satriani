@@ -70,10 +70,26 @@ module.exports = {
             }
         }
 
+
+
+        function is_comment(ch) {
+            return('(' == ch);
+        }
+
+        function skip_comment() {
+            read_while(c => (c != ')'));
+            input.next();
+        }
+
+
         function read_next() {
             read_while(is_whitespace);
             if (input.eof()) return null;
             const ch = input.peek();
+            if (is_comment(ch)) {
+                skip_comment();
+                return read_next();
+            }
             if (is_digit(ch)) return read_number();
             if (is_id_start(ch)) return read_ident();
             if (is_quote(ch)) return read_string();
@@ -87,10 +103,9 @@ module.exports = {
             return current || (current = read_next());
         }
         function next() {
-            let tok = current;
+            let token = current;
             current = null;
-            let result = tok || read_next();
-            return result;
+            return token || read_next();
         }
         function eof() {
             return peek() == null;

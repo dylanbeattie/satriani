@@ -4,10 +4,6 @@ const Satriani = require('./satriani.js');
 var sourceFilePath = process.argv[2];
 fs.readFile(sourceFilePath, 'utf8', (err, data) => {
     if (err) throw err;
-    var stdout = Satriani.interpret(data);
-    console.log('----------------------------');
-    console.log(stdout);
+    var interpreter = new Satriani.Interpreter(console.log);
+    interpreter.interpret(data);
 });
-
-// console.log(1,2,3,4,5);
-// console.log("foo", "bar", ["baz", "bam"]);

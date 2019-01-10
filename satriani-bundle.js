@@ -95,9 +95,108 @@ function apply_op(op, a, b) {
 }
 
 },{}],2:[function(require,module,exports){
+OPERATORS = [ '+', '-', '*', '/', '*', '%'];
+
 module.exports = {
-    InputStream: function (input) {
-        var pos = 0, line = 1, col = 0;
+    FALSE: { type: "bool", value: false },
+    parse: function (input) {
+
+        return parse_toplevel();
+
+        function read_operator_precedence(operator) {
+            return(OPERATORS.indexOf(operator)+1);
+        }
+
+        function peek_is_keyword(kw) {
+            const tok = input.peek();
+            return tok && tok.type == "kw" && (!kw || tok.value == kw) && tok;
+        }
+        function peek_is_operator(op) {
+            const tok = input.peek();
+            return tok && tok.type == "op" && (!op || tok.value == op) && tok;
+        }
+
+        function skip_kw(kw) {
+            if (peek_is_keyword(kw)) input.next();
+            else input.croak("Expecting keyword: \"" + kw + "\"");
+        }
+        
+        function unexpected() {
+            input.croak("Unexpected token: " + JSON.stringify(input.peek()));
+        }
+        function maybe_binary(left, this_precedence) {
+            let tok = peek_is_operator();
+            if (tok) {
+                const that_precedence = read_operator_precedence(tok.value);
+                if (that_precedence > this_precedence) {
+                    input.next();
+                    return maybe_binary({
+                        type: "binary",
+                        operator: tok.value,
+                        left: left,
+                        right: maybe_binary(parse_atom(), that_precedence)
+                    }, this_precedence);
+                }
+            }
+            return left;
+        }
+
+        function parse_say() {
+            skip_kw("say");
+            const args = parse_expression();
+            return {
+                type: "output",
+                args: args
+            }
+        }
+
+        function parse_atom() {
+            if (peek_is_keyword("say")) return parse_say();
+            const tok = input.next();
+            if (tok.type == "num" || tok.type == "str") return tok;
+            unexpected();
+        }
+
+        function parse_toplevel() {
+            let abstract_syntax_tree = [];
+            while (!input.eof()) abstract_syntax_tree.push(parse_expression());
+            return { type: "prog", prog: abstract_syntax_tree };
+        }
+
+        function parse_expression() {
+            return maybe_binary(parse_atom(), 0);
+        }
+    }
+}
+
+
+},{}],3:[function(require,module,exports){
+var parser = require('./parser.js');
+var streamer = require('./streamer.js');
+var tokenizer = require('./tokenizer.js');
+var environment = require('./environment.js');
+
+module.exports = {
+    Interpreter : function(output) {
+        this.output = output;
+        this.interpret = function (program) {
+            let stream = streamer.Stream(program);
+            let tokens = tokenizer.Tokenize(stream);
+            let ast = parser.parse(tokens);
+            let g = new environment.Environment();
+            g.output = output;
+            g.run(ast);
+        }
+    }
+};
+
+},{"./environment.js":1,"./parser.js":2,"./streamer.js":4,"./tokenizer.js":5}],4:[function(require,module,exports){
+// streamer.js: input stream for Satriani Rockstar parser
+// Based on code by Mihai Bazon / http://lisperator.net/pltut/
+
+module.exports = {
+    Stream: function (input) {
+        let pos = 0, line = 1, col = 0;
         return {
             next: next,
             peek: peek,
@@ -105,8 +204,13 @@ module.exports = {
             croak: croak,
         };
         function next() {
-            var ch = input.charAt(pos++);
-            if (ch == "\n") line++ , col = 0; else col++;
+            let ch = input.charAt(pos++);
+            if (ch == "\n") {
+                line++;
+                col = 0;
+            } else {
+                col++;
+            }
             return ch;
         }
         function peek() {
@@ -120,198 +224,11 @@ module.exports = {
         }
     }
 }
-},{}],3:[function(require,module,exports){
-module.exports = {
-    FALSE: { type: "bool", value: false },
-    parse: function (input) {
-        var PRECEDENCE = {
-            "=": 1,
-            "||": 2,
-            "&&": 3,
-            "<": 7, ">": 7, "<=": 7, ">=": 7, "==": 7, "!=": 7,
-            "+": 10, "-": 10,
-            "*": 20, "/": 20, "%": 20,
-        };
-        return parse_toplevel();
-
-        function peek_is_punctuation(ch) {
-            var tok = input.peek();
-            return tok && tok.type == "punc" && (!ch || tok.value == ch) && tok;
-        }
-        function peek_is_keyword(kw) {
-            var tok = input.peek();
-            return tok && tok.type == "kw" && (!kw || tok.value == kw) && tok;
-        }
-        function peek_is_operator(op) {
-            var tok = input.peek();
-            return tok && tok.type == "op" && (!op || tok.value == op) && tok;
-        }
-        function skip_punc(ch) {
-            if (peek_is_punctuation(ch)) input.next();
-            else input.croak("Expecting punctuation: \"" + ch + "\"");
-        }
-        function skip_kw(kw) {
-            if (peek_is_keyword(kw)) input.next();
-            else input.croak("Expecting keyword: \"" + kw + "\"");
-        }
-        function skip_op(op) {
-            if (peek_is_operator(op)) input.next();
-            else input.croak("Expecting operator: \"" + op + "\"");
-        }
-        function unexpected() {
-            input.croak("Unexpected token: " + JSON.stringify(input.peek()));
-        }
-        function maybe_binary(left, my_prec) {
-            var tok = peek_is_operator();
-            if (tok) {
-                var his_prec = PRECEDENCE[tok.value];
-                if (his_prec > my_prec) {
-                    input.next();
-                    return maybe_binary({
-                        type: tok.value == "=" ? "assign" : "binary",
-                        operator: tok.value,
-                        left: left,
-                        right: maybe_binary(parse_atom(), his_prec)
-                    }, my_prec);
-                }
-            }
-            return left;
-        }
-        function delimited(start, stop, separator, parser) {
-            var a = [], first = true;
-            skip_punc(start);
-            while (!input.eof()) {
-                if (peek_is_punctuation(stop)) break;
-                if (first) first = false; else skip_punc(separator);
-                if (peek_is_punctuation(stop)) break;
-                a.push(parser());
-            }
-            skip_punc(stop);
-            return a;
-        }
-        function parse_call(func) {
-            return {
-                type: "call",
-                func: func,
-                args: delimited("(", ")", ",", parse_expression),
-            };
-        }
-        function parse_varname() {
-            var name = input.next();
-            if (name.type != "var") input.croak("Expecting variable name");
-            return name.value;
-        }
-        function parse_say() {
-            skip_kw("say");
-            var args = parse_expression();
-            return {
-                type: "output",
-                args: args
-            }
-        }
-
-        function parse_if() {
-            skip_kw("if");
-            var cond = parse_expression();
-            if (!peek_is_punctuation("{")) skip_kw("then");
-            var then = parse_expression();
-            var ret = {
-                type: "if",
-                cond: cond,
-                then: then,
-            };
-            if (peek_is_keyword("else")) {
-                input.next();
-                ret.else = parse_expression();
-            }
-            return ret;
-        }
-        function parse_lambda() {
-            return {
-                type: "lambda",
-                vars: delimited("(", ")", ",", parse_varname),
-                body: parse_expression()
-            };
-        }
-        function parse_bool() {
-            return {
-                type: "bool",
-                value: input.next().value == "true"
-            };
-        }
-        function maybe_call(expr) {
-            expr = expr();
-            return peek_is_punctuation("(") ? parse_call(expr) : expr;
-        }
-        function parse_atom() {
-            return maybe_call(function () {
-                if (peek_is_keyword("say")) return parse_say();
-                if (peek_is_punctuation("(")) {
-                    input.next();
-                    var exp = parse_expression();
-                    skip_punc(")");
-                    return exp;
-                }
-                if (peek_is_punctuation("{")) return parse_prog();
-                if (peek_is_keyword("if")) return parse_if();
-                if (peek_is_keyword("true") || peek_is_keyword("false")) return parse_bool();
-                if (peek_is_keyword("lambda") || peek_is_keyword("λ")) {
-                    input.next();
-                    return parse_lambda();
-                }
-                var tok = input.next();
-                if (tok.type == "var" || tok.type == "num" || tok.type == "str")
-                    return tok;
-                unexpected();
-            });
-        }
-        function parse_toplevel() {
-            var prog = [];
-            while (!input.eof()) {
-                prog.push(parse_expression());
-                // if (!input.eof()) skip_punc(";");
-            }
-            return { type: "prog", prog: prog };
-        }
-        function parse_prog() {
-            var prog = delimited("{", "}", ";", parse_expression);
-            if (prog.length == 0) return FALSE;
-            if (prog.length == 1) return prog[0];
-            return { type: "prog", prog: prog };
-        }
-        function parse_expression() {
-            return maybe_call(function () {
-                return maybe_binary(parse_atom(), 0);
-            });
-        }
-    }
-}
-
-
-},{}],4:[function(require,module,exports){
-var parser = require('./parser.js');
-var streamer = require('./inputstream.js');
-var tokenizer = require('./tokenizer.js');
-var environment = require('./environment.js');
-
-module.exports = {
-    interpret: function (program) {
-        var stream = streamer.InputStream(program);
-        var tokens = tokenizer.Tokenize(stream);
-        var ast = parser.parse(tokens);
-        var g = new environment.Environment();
-        var result = "";
-        g.output = (...args) => result += args + "\n";
-        g.run(ast);
-        return result;
-    }
-};
-
-},{"./environment.js":1,"./inputstream.js":2,"./parser.js":3,"./tokenizer.js":5}],5:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
 module.exports = {
     Tokenize: function (input) {
-        var current = null;
-        var keywords = ['say', 'is'];
+        let current = null;
+        const keywords = ['say'];
         return {
             next: next,
             peek: peek,
@@ -331,13 +248,13 @@ module.exports = {
             return " \t\n".indexOf(ch) >= 0;
         }
         function read_while(predicate) {
-            var str = "";
+            let str = "";
             while (!input.eof() && predicate(input.peek())) str += input.next();
             return str;
         }
         function read_number() {
-            var has_dot = false;
-            var number = read_while(function (ch) {
+            let has_dot = false;
+            const number = read_while(function (ch) {
                 if (ch == ".") {
                     if (has_dot) return false;
                     has_dot = true;
@@ -349,7 +266,7 @@ module.exports = {
         }
 
         function read_ident() {
-            var id = read_while(is_id);
+            const id = read_while(is_id);
             return {
                 type: is_keyword(id) ? "kw" : "var",
                 value: id
@@ -372,7 +289,7 @@ module.exports = {
 
         function read_string() {
             input.next();
-            var s = read_while(is_not_quote);
+            let s = read_while(is_not_quote);
             input.next();
             return {
                 type: "str",
@@ -383,7 +300,7 @@ module.exports = {
         function read_next() {
             read_while(is_whitespace);
             if (input.eof()) return null;
-            var ch = input.peek();
+            const ch = input.peek();
             if (is_digit(ch)) return read_number();
             if (is_id_start(ch)) return read_ident();
             if (is_quote(ch)) return read_string();
@@ -397,9 +314,9 @@ module.exports = {
             return current || (current = read_next());
         }
         function next() {
-            var tok = current;
+            let tok = current;
             current = null;
-            var result = tok || read_next();
+            let result = tok || read_next();
             return result;
         }
         function eof() {
@@ -407,5 +324,5 @@ module.exports = {
         }
     }
 }
-},{}]},{},[4])(4)
+},{}]},{},[3])(3)
 });

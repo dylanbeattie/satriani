@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 
 <head>
+    rockstar web demo
 </head>
 
 <body>
@@ -18,10 +19,15 @@ say 6 * 9 / 2 + 4
 
     <script type="text/javascript" src="/satriani-bundle.js"></script>
     <script type="text/javascript">
+        function output(...args) {
+            document.getElementById('program-output').value += args + '\n';
+        }
+
         function rock() {
-            var source = document.getElementById('program-source').value;
-            var output = Satriani.interpret(source);
-            document.getElementById('program-output').value = output;
+            document.getElementById('program-output').value = '';
+            let source = document.getElementById('program-source').value;
+            let interpreter = new Satriani.Interpreter(output);
+            interpreter.interpret(source);
         }
     </script>
 </body>

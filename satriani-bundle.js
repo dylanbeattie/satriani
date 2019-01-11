@@ -105,7 +105,7 @@ OPERATORS = [ '+', '-', '*', '/', '*', '%', '='];
 
 module.exports = {
     FALSE: { type: "bool", value: false },
-    parse: function (input) {
+    Parse: function (input) {
 
         return parse_toplevel();
 
@@ -188,7 +188,7 @@ module.exports = {
         this.interpret = function (program) {
             let stream = streamer.Stream(program);
             let tokens = tokenizer.Tokenize(stream);
-            let ast = parser.parse(tokens);
+            let ast = parser.Parse(tokens);
             let g = new environment.Environment();
             g.output = output;
             g.run(ast);

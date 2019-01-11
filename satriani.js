@@ -1,7 +1,7 @@
-var parser = require('./parser.js');
-var streamer = require('./streamer.js');
-var tokenizer = require('./tokenizer.js');
-var environment = require('./environment.js');
+const parser = require('./parser.js');
+const streamer = require('./streamer.js');
+const tokenizer = require('./tokenizer.js');
+const environment = require('./environment.js');
 
 module.exports = {
     Interpreter : function(output) {
@@ -9,10 +9,16 @@ module.exports = {
         this.interpret = function (program) {
             let stream = streamer.Stream(program);
             let tokens = tokenizer.Tokenize(stream);
-            let ast = parser.parse(tokens);
+            let ast = parser.Parse(tokens);
             let g = new environment.Environment();
             g.output = output;
             g.run(ast);
+        }
+        this.parse = function(program) {
+            let stream = streamer.Stream(program);
+            let tokens = tokenizer.Tokenize(stream);
+            let ast = parser.Parse(tokens);
+            return(ast);
         }
     }
 };

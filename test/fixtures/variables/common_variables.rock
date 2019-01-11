@@ -13,3 +13,10 @@ say your variable
 say "expressions"
 say a variable with the variable
 say my variable with your variable
+
+say "case insensitivity"
+The time is 5
+say the time
+MY DAD IS 72
+SAY MY DAD
+

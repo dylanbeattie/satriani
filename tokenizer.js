@@ -19,7 +19,7 @@ module.exports = {
             croak: input.croak
         };
         function is_keyword(x) {
-            return keywords.indexOf(x) >= 0;
+            return keywords.indexOf(x.toLowerCase()) >= 0;
         }
         function is_digit(ch) {
             return /[0-9]/i.test(ch);
@@ -29,8 +29,8 @@ module.exports = {
         }
 
         function dealias_operator(id) {
-            for(var op in OPERATOR_ALIASES) {
-                if (OPERATOR_ALIASES[op].indexOf(id) >= 0) return(op);
+            for(let op in OPERATOR_ALIASES) {
+                if (OPERATOR_ALIASES[op].indexOf(id.toLowerCase()) >= 0) return(op);
             }
             return(null);
         }
@@ -58,7 +58,7 @@ module.exports = {
 
 
         function is_common_variable_prefix(id) {
-            return (COMMON_VARIABLE_PREFIXES.indexOf(id) >= 0);
+            return (COMMON_VARIABLE_PREFIXES.indexOf(id.toLowerCase()) >= 0);
         }
 
         function read_ident() {
@@ -68,7 +68,7 @@ module.exports = {
                 id += "_" + read_while(is_id);
                 return {
                     type: "var",
-                    value: id
+                    value: id.toLowerCase()
                 }
             }
             let op = dealias_operator(id);
@@ -78,7 +78,7 @@ module.exports = {
             };
             return {
                 type: is_keyword(id) ? "kw" : "var",
-                value: id
+                value: id.toLowerCase()
             };
         }
         function is_id_start(ch) {

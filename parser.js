@@ -2,7 +2,7 @@ OPERATORS = [ '+', '-', '*', '/', '*', '%', '='];
 
 module.exports = {
     FALSE: { type: "bool", value: false },
-    parse: function (input) {
+    Parse: function (input) {
 
         return parse_toplevel();
 

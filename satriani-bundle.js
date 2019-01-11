@@ -48,6 +48,12 @@ Environment.prototype = {
          case "str":
          case "bool":
              return exp.value;
+         case "var":
+             return env.get(exp.value);
+         case "assign":
+             if (exp.left.type != "var")
+                 throw new Error("Cannot assign to " + JSON.stringify(exp.left));
+             return env.set(exp.left.value, evaluate(exp.right, env));
          case "binary":
              return apply_op(exp.operator,
                  evaluate(exp.left, env),
@@ -95,7 +101,7 @@ function apply_op(op, a, b) {
 }
 
 },{}],2:[function(require,module,exports){
-OPERATORS = [ '+', '-', '*', '/', '*', '%'];
+OPERATORS = [ '+', '-', '*', '/', '*', '%', '='];
 
 module.exports = {
     FALSE: { type: "bool", value: false },
@@ -131,7 +137,7 @@ module.exports = {
                 if (that_precedence > this_precedence) {
                     input.next();
                     return maybe_binary({
-                        type: "binary",
+                        type: (tok.value == '=' ? 'assign': "binary"),
                         operator: tok.value,
                         left: left,
                         right: maybe_binary(parse_atom(), that_precedence)
@@ -153,7 +159,7 @@ module.exports = {
         function parse_atom() {
             if (peek_is_keyword("say")) return parse_say();
             const tok = input.next();
-            if (tok.type == "num" || tok.type == "str") return tok;
+            if (tok.type == "var" || tok.type == "num" || tok.type == "str") return tok;
             unexpected();
         }
 
@@ -228,6 +234,16 @@ module.exports = {
 module.exports = {
     Tokenize: function (input) {
         let current = null;
+        const OPERATOR_ALIASES = {
+            '+' : ['with','plus'],
+            '-' : ['minus', 'without'],
+            '*' : ['times', 'of'],
+            '/' : ['over'],
+            '=' : ['is']
+        }
+
+        const COMMON_VARIABLE_PREFIXES = ['a', 'an', 'the', 'my', 'your'];
+
         const keywords = ['say'];
         return {
             next: next,
@@ -242,8 +258,16 @@ module.exports = {
             return /[0-9]/i.test(ch);
         }
         function is_op_char(ch) {
-            return "+-*/".indexOf(ch) >= 0;
+            return OPERATOR_ALIASES.hasOwnProperty(ch);
         }
+
+        function dealias_operator(id) {
+            for(var op in OPERATOR_ALIASES) {
+                if (OPERATOR_ALIASES[op].indexOf(id) >= 0) return(op);
+            }
+            return(null);
+        }
+
         function is_whitespace(ch) {
             return " \t\n".indexOf(ch) >= 0;
         }
@@ -265,8 +289,26 @@ module.exports = {
             return { type: "num", value: parseFloat(number) };
         }
 
+
+        function is_common_variable_prefix(id) {
+            return (COMMON_VARIABLE_PREFIXES.indexOf(id) >= 0);
+        }
+
         function read_ident() {
-            const id = read_while(is_id);
+            let id = read_while(is_id);
+            if (is_common_variable_prefix(id)) {
+                input.next();
+                id += "_" + read_while(is_id);
+                return {
+                    type: "var",
+                    value: id
+                }
+            }
+            let op = dealias_operator(id);
+            if (op) return {
+                type: "op",
+                value: op
+            };
             return {
                 type: is_keyword(id) ? "kw" : "var",
                 value: id
@@ -297,10 +339,26 @@ module.exports = {
             }
         }
 
+
+
+        function is_comment(ch) {
+            return('(' == ch);
+        }
+
+        function skip_comment() {
+            read_while(c => (c != ')'));
+            input.next();
+        }
+
+
         function read_next() {
             read_while(is_whitespace);
             if (input.eof()) return null;
             const ch = input.peek();
+            if (is_comment(ch)) {
+                skip_comment();
+                return read_next();
+            }
             if (is_digit(ch)) return read_number();
             if (is_id_start(ch)) return read_ident();
             if (is_quote(ch)) return read_string();
@@ -314,10 +372,9 @@ module.exports = {
             return current || (current = read_next());
         }
         function next() {
-            let tok = current;
+            let token = current;
             current = null;
-            let result = tok || read_next();
-            return result;
+            return token || read_next();
         }
         function eof() {
             return peek() == null;

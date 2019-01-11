@@ -5,8 +5,11 @@ module.exports = {
             '+' : ['with','plus'],
             '-' : ['minus', 'without'],
             '*' : ['times', 'of'],
-            '/' : ['over']
+            '/' : ['over'],
+            '=' : ['is']
         }
+
+        const COMMON_VARIABLE_PREFIXES = ['a', 'an', 'the', 'my', 'your'];
 
         const keywords = ['say'];
         return {
@@ -22,7 +25,7 @@ module.exports = {
             return /[0-9]/i.test(ch);
         }
         function is_op_char(ch) {
-            return "+-*/".indexOf(ch) >= 0;
+            return OPERATOR_ALIASES.hasOwnProperty(ch);
         }
 
         function dealias_operator(id) {
@@ -53,8 +56,21 @@ module.exports = {
             return { type: "num", value: parseFloat(number) };
         }
 
+
+        function is_common_variable_prefix(id) {
+            return (COMMON_VARIABLE_PREFIXES.indexOf(id) >= 0);
+        }
+
         function read_ident() {
-            const id = read_while(is_id);
+            let id = read_while(is_id);
+            if (is_common_variable_prefix(id)) {
+                input.next();
+                id += "_" + read_while(is_id);
+                return {
+                    type: "var",
+                    value: id
+                }
+            }
             let op = dealias_operator(id);
             if (op) return {
                 type: "op",

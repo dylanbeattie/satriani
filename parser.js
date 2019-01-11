@@ -1,4 +1,4 @@
-OPERATORS = [ '+', '-', '*', '/', '*', '%'];
+OPERATORS = [ '+', '-', '*', '/', '*', '%', '='];
 
 module.exports = {
     FALSE: { type: "bool", value: false },
@@ -34,7 +34,7 @@ module.exports = {
                 if (that_precedence > this_precedence) {
                     input.next();
                     return maybe_binary({
-                        type: "binary",
+                        type: (tok.value == '=' ? 'assign': "binary"),
                         operator: tok.value,
                         left: left,
                         right: maybe_binary(parse_atom(), that_precedence)
@@ -56,7 +56,7 @@ module.exports = {
         function parse_atom() {
             if (peek_is_keyword("say")) return parse_say();
             const tok = input.next();
-            if (tok.type == "num" || tok.type == "str") return tok;
+            if (tok.type == "var" || tok.type == "num" || tok.type == "str") return tok;
             unexpected();
         }
 

@@ -51,6 +51,5 @@ function execute_and_compare_error(file) {
     let source = fs.readFileSync(file, 'utf8');
     let targetFile = file + '.err';
     let target = fs.existsSync(targetFile) ? fs.readFileSync(targetFile, 'utf8') : '';
-    console.log(target);
     assert.throws(function() { execute(source) }, Error, target);
 }

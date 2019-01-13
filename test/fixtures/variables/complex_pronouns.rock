@@ -1,0 +1,5 @@
+say "Sadness"
+Tommy is 1
+Gina is 2
+Sadness is Tommy without Gina
+Say it (should print -1, because Tommy - Gina = -1 but 'it' should refer to Sadness here)

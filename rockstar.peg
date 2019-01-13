@@ -2,21 +2,29 @@ program     = p:statement *
                 { return {program: p} }
 
 comment     = '(' [^)]* ')'
+
 _           = ((' ' / '\t')+) / comment
 
-statement   = _? s:(operation) ','? _* '\n' { return s }
+statement   = _* s:(operation / blank_line) ','? _* '\n'
+                { return s }
+
 operation   = expression / output
 
-output      = ('say'i/'shout'i/'whisper'i/'scream'i) _ e:expression
+output      = ('say'i/'shout'i/'whisper'i/'scream'i) _+ e:expression
                 {return {'output': e}}
 
 expression  = number / string
 
-number      = n:$([0-9]+ ('.' [0-9]+)?)
+number      = n:$('-'?[0-9]+ ('.' [0-9]+)?)
                 { return {number: parseFloat(n)} }
 
 string      = '"' s:$[^"]+ '"'
                 { return {string: s}}
+
+blank_line = _* {return {t: 'blank_line'}}
+
+
+
 
 /*
 

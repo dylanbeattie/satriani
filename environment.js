@@ -57,7 +57,7 @@ Environment.prototype = {
              case "string":
                  return expr;
              case "output":
-                 console.log(evaluate(expr, env));
+                 env.output(evaluate(expr, env));
                  return null;
          }
      }
@@ -79,12 +79,10 @@ function ope() {
                  return status;
              case "number":
              case "string":
-                 console.log('HOWDOWN!@');
                  return token[1];
              case "output":
-                 console.log('OUTPUT - evaluating token[1] = ' + JSON.stringify(token[1]));
                  let result = evaluate(token[1], env);
-                 env.output('LOG: ' + result);
+                 env.output(result);
                  return;
          }
     });

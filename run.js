@@ -15,6 +15,10 @@ fs.readFile(sourceFilePath, 'utf8', (err, data) => {;
         env.run(program);
         // console.log(JSON.stringify(tree,null,2));
     } catch (e) {
-        // console.log(JSON.stringify(e,null,2));
+        var lines = data.split(/\n/);
+        console.log(lines[e.location.start.line -1]);
+        console.log(' '.repeat(e.location.start.column-1) + '^');
+        console.log(e.message);
+        console.log(sourceFilePath + " line " + e.location.start.line + " col " + e.location.start.column);
     }
 });

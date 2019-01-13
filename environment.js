@@ -10,7 +10,7 @@ function Environment(parent) {
 
 Environment.prototype = {
     extend: function () { return new Environment(this) },
-    lookup: function (name) {
+    bovril: function (name) {
         let scope = this;
         while (scope) {
             if (Object.prototype.hasOwnProperty.call(scope.vars, name))
@@ -19,14 +19,14 @@ Environment.prototype = {
         }
     },
 
-    get: function (name) {
+    lookup: function (name) {
         if (name in this.vars)
             return this.vars[name];
         throw new Error("Undefined variable " + name);
     },
 
-    set: function (name, value) {
-        var scope = this.lookup(name);
+    assign: function (name, value) {
+        let scope = this.bovril(name);
         // let's not allow defining globals from a nested environment
         if (!scope && this.parent)
             throw new Error("Undefined variable " + name);
@@ -61,6 +61,11 @@ Environment.prototype = {
                  return null;
              case "binary":
                  return binary(expr, env);
+             case "lookup":
+                 return env.lookup(expr.variable);
+             case "assign":
+                 let value = evaluate(expr.expression, env)
+                 return env.assign(expr.variable, value);
          }
      }
  }
@@ -88,32 +93,32 @@ Environment.prototype = {
         //
     }
  }
-function ope() {
-    Object.entries(pair).forEach(token => {
-        var type = token[0];
-        var expr = token[1];
-        console.log('Type ' + type + ', expr' + JSON.stringify(expr));
-         console.log(JSON.stringify(token));
-         switch(type) {
-             case "program":
-
-                 console.log(token[1]);
-                 let status = false;
-                 token[1].forEach(function (p2) {
-                     status = evaluate(Object.entries(p2), env)
-                 });
-                 return status;
-             case "number":
-             case "string":
-                 return token[1];
-             case "output":
-                 let result = evaluate(token[1], env);
-                 env.output(result);
-                 return;
-         }
-    });
-}
-
+// function ope() {
+//     Object.entries(pair).forEach(token => {
+//         var type = token[0];
+//         var expr = token[1];
+//         console.log('Type ' + type + ', expr' + JSON.stringify(expr));
+//          console.log(JSON.stringify(token));
+//          switch(type) {
+//              case "program":
+//
+//                  console.log(token[1]);
+//                  let status = false;
+//                  token[1].forEach(function (p2) {
+//                      status = evaluate(Object.entries(p2), env)
+//                  });
+//                  return status;
+//              case "number":
+//              case "string":
+//                  return token[1];
+//              case "output":
+//                  let result = evaluate(token[1], env);
+//                  env.output(result);
+//                  return;
+//          }
+//     });
+// }
+//
  //     switch (pair[0]) {
  //         // case "var":
  //         //     return env.get(exp.value);

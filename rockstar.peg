@@ -8,12 +8,12 @@ _           = ((' ' / '\t')+) / comment
 statement   = _* s:(operation / blank_line) ','? _* '\n'
                 { return s }
 
-operation   = expression / output / assignment
+operation   = assignment / expression / output
 
 output      = ('say'i/'shout'i/'whisper'i/'scream'i) _+ e:expression
                 {return {'output': e}}
 
-simple_expression  =    number / string
+simple_expression  =    lookup / number / string
 
 number      = n:$('-'?[0-9]+ ('.' [0-9]+)?)
                 { return {number: parseFloat(n)} }
@@ -44,16 +44,18 @@ subtract 	= _* ('-' / 'minus ' / 'without ') _*   { return '-' }
 multiply 	= _* ('*' / 'times ' / 'of ') _*        { return '*' }
 divide 		= _* ('/' / 'over ' / 'between ') _*    { return '/' }
 
-identifier 	= variable // / keyword
+lookup 	= v:variable
+	{ return { lookup: { variable: v } }; }
 
-assignment 	= v:variable _* ('=' / 'is'i / 'was'i) _* e:expression
+variable = common_variable
+
+assignment 	= v:variable _* ('=' / 'is 'i / 'was 'i) _* e:expression
 				{ return { assign: { variable: v, expression: e} }; }
 
-variable 	= common_variable
+common_prefix = ( 'an'i / 'a'i / 'the'i / 'my'i / 'your'i)
+common_variable = prefix:common_prefix _+ name:$([A-Za-z]+)
+				{ return prefix.toLowerCase() + '_' + name.toLowerCase() };
 
-common_prefix = ( 'a 'i / 'an 'i / 'the 'i / 'my 'i / 'your 'i)
-common_variable = prefix:common_prefix _* name:$([A-Za-z]+)
-				{ return prefix + '_' + name };
 
 /*
 

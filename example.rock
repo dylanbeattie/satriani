@@ -1,0 +1,4 @@
+say "hello world"
+say 5 + 2
+say 6 * 9 / 2 + 4
+

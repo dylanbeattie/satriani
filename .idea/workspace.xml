@@ -2,9 +2,24 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8aad1e04-fa77-485a-8040-58eae540723e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/test/fixtures/variables/complex_pronouns.rock" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/fixtures/variables/complex_pronouns.rock.out" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example.rock" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/fixtures/whitespace/leading_blank_lines.rock" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/fixtures/whitespace/leading_blank_lines.rock.out" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/fixtures/whitespace/leading_empty_lines.rock" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/fixtures/whitespace/leading_empty_lines.rock.out" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/fixtures/whitespace/no_newline_at_eof.rock" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/fixtures/whitespace/no_newline_at_eof.rock.out" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/fixtures/whitespace/trailing_blank_lines.rock" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/fixtures/whitespace/trailing_blank_lines.rock.out" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/fixtures/whitespace/trailing_empty_lines.rock" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/fixtures/whitespace/trailing_empty_lines.rock.out" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rockstar.js" beforeDir="false" afterPath="$PROJECT_DIR$/rockstar.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rockstar.peg" beforeDir="false" afterPath="$PROJECT_DIR$/rockstar.peg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/satriani-bundle.js" beforeDir="false" afterPath="$PROJECT_DIR$/satriani-bundle.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/satriani.js" beforeDir="false" afterPath="$PROJECT_DIR$/satriani.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -18,73 +33,43 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test/fixtures/variables/proper_variables.rock">
+        <entry file="file://$PROJECT_DIR$/test/fixtures/whitespace/no_newline_at_eof.rock">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="242">
-              <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test/fixtures/variables/proper_variables.rock.out">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="110">
-              <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/spec.md">
-          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-            <state split_layout="SPLIT">
-              <first_editor relative-caret-position="350">
-                <caret line="35" column="12" lean-forward="true" selection-start-line="35" selection-start-column="12" selection-end-line="35" selection-end-column="12" />
-              </first_editor>
-              <second_editor />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/rockstar.peg">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="303">
-              <caret line="51" column="75" lean-forward="true" selection-start-line="51" selection-start-column="75" selection-end-line="51" selection-end-column="75" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/rockstar-js.peg">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="539">
-              <caret line="197" column="2" selection-start-line="197" selection-start-column="2" selection-end-line="197" selection-end-column="2" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test/fixtures/variables/pronouns.rock">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="220">
-              <caret line="10" column="22" lean-forward="true" selection-start-line="10" selection-start-column="22" selection-end-line="10" selection-end-column="22" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test/fixtures/variables/complex_pronouns.rock">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="66">
-              <caret line="3" column="12" lean-forward="true" selection-start-line="3" selection-start-column="12" selection-end-line="3" selection-end-column="12" />
+            <state>
+              <caret selection-end-line="1" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/test/fixtures/variables/complex_pronouns.rock.out">
+        <entry file="file://$PROJECT_DIR$/test/fixtures/whitespace/no_newline_at_eof.rock.out">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="22">
+              <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/test/fixtures/whitespace/trailing_blank_lines.rock">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="66">
+              <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/test/fixtures/whitespace/trailing_blank_lines.rock.out">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="22">
+              <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/test/fixtures/whitespace/trailing_empty_lines.rock">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="44">
               <caret line="2" lean-forward="true" selection-start-line="2" selection-end-line="2" />
@@ -93,19 +78,46 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test/fixtures/variables/pronouns.rock.out">
+        <entry file="file://$PROJECT_DIR$/test/fixtures/whitespace/trailing_empty_lines.rock.out">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="396">
-              <caret line="18" column="11" lean-forward="true" selection-start-line="18" selection-start-column="11" selection-end-line="18" selection-end-column="11" />
+            <state relative-caret-position="22">
+              <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/environment.js">
+        <entry file="file://$PROJECT_DIR$/test/fixtures/whitespace/leading_blank_lines.rock">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="412">
-              <caret line="21" column="29" lean-forward="true" selection-start-line="21" selection-start-column="29" selection-end-line="21" selection-end-column="29" />
+            <state relative-caret-position="88">
+              <caret line="4" lean-forward="true" selection-start-line="4" selection-end-line="4" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/test/fixtures/whitespace/leading_blank_lines.rock.out">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="22">
+              <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/test/fixtures/whitespace/leading_empty_lines.rock.out">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="22">
+              <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/rockstar.peg">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="88">
+              <caret line="4" column="17" selection-start-line="4" selection-start-column="17" selection-end-line="4" selection-end-column="17" />
             </state>
           </provider>
         </entry>
@@ -140,17 +152,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$APPLICATION_CONFIG_DIR$/scratches/scratch.js" />
-        <option value="$PROJECT_DIR$/hello_world.rock" />
-        <option value="$PROJECT_DIR$/tests/io/hello_world.rock.out" />
-        <option value="$PROJECT_DIR$/test/fixtures/math/addition.rock" />
-        <option value="$PROJECT_DIR$/test/fixtures/math/addition.rock.out" />
-        <option value="$PROJECT_DIR$/inputstream.js" />
-        <option value="$PROJECT_DIR$/streamer.js" />
-        <option value="$PROJECT_DIR$/test/streamer.js" />
-        <option value="$PROJECT_DIR$/test/fixtures/math/operator_precedence.rock.out" />
-        <option value="$PROJECT_DIR$/index.html" />
-        <option value="$PROJECT_DIR$/.circleci/spec.md" />
         <option value="$PROJECT_DIR$/test/fixtures/comments/trailing_comment.rock" />
         <option value="$PROJECT_DIR$/test/fixtures/comments/trailing_comment.rock.out" />
         <option value="$PROJECT_DIR$/test/fixtures/comments/invalid_comments.rock" />
@@ -159,12 +160,10 @@
         <option value="$PROJECT_DIR$/test/fixtures/comments/complex_comments.rock.out" />
         <option value="$PROJECT_DIR$/test/fixtures/math/addition_aliases.rock" />
         <option value="$PROJECT_DIR$/test/fixtures/math/addition_aliases.rock.out" />
-        <option value="$PROJECT_DIR$/test/fixtures/math/operators.rock" />
         <option value="$PROJECT_DIR$/test/fixtures/math/operators.rock.out" />
         <option value="$PROJECT_DIR$/test/fixtures/math/operator_aliases.rock" />
         <option value="$PROJECT_DIR$/test/fixtures/math/operator_aliases.rock.out" />
         <option value="$PROJECT_DIR$/spec.md" />
-        <option value="$PROJECT_DIR$/package.json" />
         <option value="$PROJECT_DIR$/test/parser_tests.js" />
         <option value="$PROJECT_DIR$/parser.js" />
         <option value="$PROJECT_DIR$/test/fixtures/io/hello_world.rock.out" />
@@ -172,7 +171,6 @@
         <option value="$PROJECT_DIR$/test/fixtures/variables/common_variables.rock.out" />
         <option value="$PROJECT_DIR$/tokenizer.js" />
         <option value="$PROJECT_DIR$/test/fixtures/io/hello_world.rock" />
-        <option value="$PROJECT_DIR$/satriani.js" />
         <option value="$PROJECT_DIR$/program.js" />
         <option value="$PROJECT_DIR$/test/fixtures/comments/complex_comments.rock" />
         <option value="$PROJECT_DIR$/test/test.js" />
@@ -183,13 +181,28 @@
         <option value="$PROJECT_DIR$/run.js" />
         <option value="$PROJECT_DIR$/test/fixtures/variables/proper_variables.rock" />
         <option value="$PROJECT_DIR$/rockstar-js.peg" />
-        <option value="$PROJECT_DIR$/rockstar.peg" />
         <option value="$PROJECT_DIR$/environment.js" />
         <option value="$PROJECT_DIR$/test/fixtures/variables/pronouns.rock" />
         <option value="$PROJECT_DIR$/test/fixtures/variables/pronouns.rock.out" />
         <option value="$PROJECT_DIR$/test/fixtures/variables/proper_variables.rock.out" />
         <option value="$PROJECT_DIR$/test/fixtures/variables/complex_pronouns.rock" />
         <option value="$PROJECT_DIR$/test/fixtures/variables/complex_pronouns.rock.out" />
+        <option value="$PROJECT_DIR$/package.json" />
+        <option value="$PROJECT_DIR$/satriani.js" />
+        <option value="$PROJECT_DIR$/index.html" />
+        <option value="$PROJECT_DIR$/example.rock" />
+        <option value="$PROJECT_DIR$/test/fixtures/whitespace/trailing_blank_lines.rock" />
+        <option value="$PROJECT_DIR$/test/fixtures/whitespace/trailing_empty_lines.rock" />
+        <option value="$PROJECT_DIR$/test/fixtures/math/operators.rock" />
+        <option value="$PROJECT_DIR$/test/fixtures/whitespace/leading_blank_lines.rock" />
+        <option value="$PROJECT_DIR$/test/fixtures/whitespace/leading_empty_lines.rock" />
+        <option value="$PROJECT_DIR$/rockstar.peg" />
+        <option value="$PROJECT_DIR$/test/fixtures/whitespace/leading_blank_lines.rock.out" />
+        <option value="$PROJECT_DIR$/test/fixtures/whitespace/no_newline_at_eof.rock" />
+        <option value="$PROJECT_DIR$/test/fixtures/whitespace/trailing_blank_lines.rock.out" />
+        <option value="$PROJECT_DIR$/test/fixtures/whitespace/trailing_empty_lines.rock.out" />
+        <option value="$PROJECT_DIR$/test/fixtures/whitespace/leading_empty_lines.rock.out" />
+        <option value="$PROJECT_DIR$/test/fixtures/whitespace/no_newline_at_eof.rock.out" />
       </list>
     </option>
   </component>
@@ -229,12 +242,6 @@
               <item name="satriani" type="b2602c69:ProjectViewProjectNode" />
               <item name="satriani" type="462c0819:PsiDirectoryNode" />
               <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="failures" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="satriani" type="b2602c69:ProjectViewProjectNode" />
-              <item name="satriani" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
               <item name="fixtures" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -249,13 +256,6 @@
               <item name="satriani" type="462c0819:PsiDirectoryNode" />
               <item name="test" type="462c0819:PsiDirectoryNode" />
               <item name="fixtures" type="462c0819:PsiDirectoryNode" />
-              <item name="io" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="satriani" type="b2602c69:ProjectViewProjectNode" />
-              <item name="satriani" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="fixtures" type="462c0819:PsiDirectoryNode" />
               <item name="math" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -263,7 +263,7 @@
               <item name="satriani" type="462c0819:PsiDirectoryNode" />
               <item name="test" type="462c0819:PsiDirectoryNode" />
               <item name="fixtures" type="462c0819:PsiDirectoryNode" />
-              <item name="variables" type="462c0819:PsiDirectoryNode" />
+              <item name="whitespace" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="satriani" type="b2602c69:ProjectViewProjectNode" />
@@ -290,11 +290,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/test/fixtures/whitespace" />
       <recent name="$PROJECT_DIR$/test/fixtures/variables" />
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/test" />
       <recent name="$PROJECT_DIR$/test/fixtures/math" />
-      <recent name="$PROJECT_DIR$/test/fixtures/comments" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$" />
@@ -451,7 +451,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="48392000" />
+    <option name="totallyTimeSpent" value="51191000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -489,70 +489,6 @@
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor />
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch.js">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/satriani-bundle.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2650">
-          <caret line="125" column="29" selection-start-line="125" selection-start-column="29" selection-end-line="125" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/inputstream.js" />
-    <entry file="file://$PROJECT_DIR$/LICENSE">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="144">
-          <caret line="7" column="14" selection-start-line="7" selection-start-column="14" selection-end-line="7" selection-end-column="14" />
-          <folding>
-            <element signature="n#style#0;n#textarea#0;n#body#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#textarea#1;n#body#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/fixtures/math/operator_aliases.rock.out">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="242">
-          <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/fixtures/math/operators.rock.out">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="286">
-          <caret line="13" column="1" selection-start-line="13" selection-start-column="1" selection-end-line="13" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/streamer.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="484">
-          <caret line="23" column="13" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/streamer_tests.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="489">
-          <caret line="26" column="8" selection-start-line="26" selection-start-column="8" selection-end-line="26" selection-end-column="80" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/parser.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="324">
@@ -588,24 +524,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/satriani.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="242">
-          <caret line="11" column="9" lean-forward="true" selection-start-line="11" selection-start-column="9" selection-end-line="11" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/yarn.lock">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-2514">
           <caret line="25" column="69" selection-start-line="25" selection-start-column="69" selection-end-line="25" selection-end-column="69" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/package.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="462">
-          <caret line="21" column="18" lean-forward="true" selection-start-line="21" selection-start-column="18" selection-end-line="21" selection-end-column="18" />
         </state>
       </provider>
     </entry>
@@ -626,13 +548,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test/fixtures/comments/simple_comment.rock">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="44">
-          <caret line="2" lean-forward="true" selection-start-line="2" selection-end-line="2" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/test/fixtures/io/hello_world.rock">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="66">
@@ -640,31 +555,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/program.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="264">
-          <caret line="12" column="3" lean-forward="true" selection-start-line="12" selection-start-column="3" selection-end-line="12" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/fixtures/comments/complex_comments.rock.out">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="110">
-          <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/test/test.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="175">
           <caret line="32" column="22" selection-start-line="32" selection-start-column="22" selection-end-line="32" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/fixtures/comments/complex_comments.rock">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="308">
-          <caret line="14" column="77" lean-forward="true" selection-start-line="14" selection-start-column="77" selection-end-line="14" selection-end-column="77" />
         </state>
       </provider>
     </entry>
@@ -686,13 +580,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="286">
           <caret line="13" column="12" lean-forward="true" selection-start-line="13" selection-start-column="12" selection-end-line="13" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/fixtures/math/operators.rock">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="242">
-          <caret line="11" column="9" lean-forward="true" selection-start-line="11" selection-start-column="9" selection-end-line="11" selection-end-column="9" />
         </state>
       </provider>
     </entry>
@@ -731,13 +618,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/run.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="15" column="52" lean-forward="true" selection-start-line="15" selection-start-column="52" selection-end-line="15" selection-end-column="52" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/test/fixtures/variables/common_variables.rock">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="374">
@@ -752,13 +632,6 @@
             <caret line="35" column="12" lean-forward="true" selection-start-line="35" selection-start-column="12" selection-end-line="35" selection-end-column="12" />
           </first_editor>
           <second_editor />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/rockstar.peg">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="303">
-          <caret line="51" column="75" lean-forward="true" selection-start-line="51" selection-start-column="75" selection-end-line="51" selection-end-column="75" />
         </state>
       </provider>
     </entry>
@@ -815,6 +688,167 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="44">
           <caret line="2" lean-forward="true" selection-start-line="2" selection-end-line="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="362">
+          <caret line="21" column="18" lean-forward="true" selection-start-line="21" selection-start-column="18" selection-end-line="21" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/program.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="264">
+          <caret line="12" column="3" lean-forward="true" selection-start-line="12" selection-start-column="3" selection-end-line="12" selection-end-column="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/satriani-bundle.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="539">
+          <caret line="125" column="4" lean-forward="true" selection-start-line="125" selection-start-column="4" selection-end-line="125" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/satriani.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="15" column="9" lean-forward="true" selection-start-line="15" selection-start-column="9" selection-end-line="15" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="262">
+          <caret line="31" column="25" lean-forward="true" selection-start-line="31" selection-start-column="25" selection-end-line="31" selection-end-column="25" />
+          <folding>
+            <element signature="n#style#0;n#textarea#0;n#body#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#textarea#1;n#body#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/example.rock">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="88">
+          <caret line="4" lean-forward="true" selection-start-line="4" selection-end-line="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/fixtures/comments/whitespace.rock">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/fixtures/comments/simple_comment.rock">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="44">
+          <caret line="2" lean-forward="true" selection-start-line="2" selection-end-line="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/fixtures/math/operators.rock">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="308">
+          <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/fixtures/whitespace/leading_empty_lines.rock">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="88">
+          <caret line="4" lean-forward="true" selection-start-line="4" selection-end-line="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/run.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="242">
+          <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/fixtures/comments/complex_comments.rock.out">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="110">
+          <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/fixtures/comments/complex_comments.rock">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="15" lean-forward="true" selection-start-line="15" selection-end-line="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/rockstar.peg">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="88">
+          <caret line="4" column="17" selection-start-line="4" selection-start-column="17" selection-end-line="4" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/fixtures/whitespace/leading_blank_lines.rock">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="88">
+          <caret line="4" lean-forward="true" selection-start-line="4" selection-end-line="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/fixtures/whitespace/leading_blank_lines.rock.out">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="22">
+          <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/fixtures/whitespace/no_newline_at_eof.rock">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret selection-end-line="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/fixtures/whitespace/trailing_blank_lines.rock">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="66">
+          <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/fixtures/whitespace/trailing_blank_lines.rock.out">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="22">
+          <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/fixtures/whitespace/trailing_empty_lines.rock">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="44">
+          <caret line="2" lean-forward="true" selection-start-line="2" selection-end-line="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/fixtures/whitespace/trailing_empty_lines.rock.out">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="22">
+          <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/fixtures/whitespace/leading_empty_lines.rock.out">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="22">
+          <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/fixtures/whitespace/no_newline_at_eof.rock.out">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="22">
+          <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
         </state>
       </provider>
     </entry>

@@ -8,7 +8,7 @@ module.exports = {
             let ast = this.parse(program);
             let g = new environment.Environment();
             g.output = output;
-            g.run(ast);
+            return g.run(ast);
         }
         this.parse = function(program) {
             let ast = rockstar.parse(program);

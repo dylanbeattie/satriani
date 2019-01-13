@@ -16,7 +16,7 @@
   "scripts": {
     "browserify": "browserify --standalone Satriani satriani.js -o satriani-bundle.js",
     "serve": "python -m SimpleHTTPServer 8000",
-    "test": "mocha test/*.js"
+    "test": "pegjs rockstar.peg; mocha test/*.js"
   },
   "repository": {
     "type": "git",

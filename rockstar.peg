@@ -1,11 +1,14 @@
-program     = p:statement *
-                { return {program: p} }
+program     = head:statement tail:((_* '\n') statement)*
+                {
+                return { program: [head].concat(tail.map(item => item[1]))
+                 }
+                }
 
 comment     = '(' [^)]* ')'
 
 _           = ((' ' / '\t')+) / comment
 
-statement   = _* s:(operation / blank_line) ','? _* '\n'
+statement   = _* s:(operation / blank_line)
                 { return s }
 
 operation   = output / assignment / expression

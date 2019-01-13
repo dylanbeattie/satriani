@@ -27,7 +27,22 @@ say 6 * 9 / 2 + 4
             document.getElementById('program-output').value = '';
             let source = document.getElementById('program-source').value;
             let interpreter = new Satriani.Interpreter(output);
-            interpreter.interpret(source);
+            try {
+                interpreter.interpret(source);
+            } catch (e) {
+                if (e.location && e.location.start) {
+                    var lines = source.split(/\n/);
+                    output(lines[e.location.start.line - 1]);
+                    output(' '.repeat(e.location.start.column - 1) + '^');
+                    output(e.message);
+                    output(sourceFilePath + " line " + e.location.start.line + " col " + e.location.start.column);
+                } else {
+                    output(e);
+                }
+
+            }
+
+
         }
     </script>
 </body>

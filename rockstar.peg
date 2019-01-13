@@ -8,7 +8,7 @@ _           = ((' ' / '\t')+) / comment
 statement   = _* s:(operation / blank_line) ','? _* '\n'
                 { return s }
 
-operation   = expression / output
+operation   = expression / output / assignment
 
 output      = ('say'i/'shout'i/'whisper'i/'scream'i) _+ e:expression
                 {return {'output': e}}
@@ -37,10 +37,23 @@ product     = first:simple_expression rest:((multiply / divide) simple_expressio
                 }, first); }
             / simple_expression
 
-add 		= _* ('+' / 'plus ' / 'with ') _* { return '+' }
-subtract 	= _* ('-' / 'minus ' / 'without ') _* { return '-' }
-multiply 	= _* ('*' / 'times ' / 'of ') _*  { return '*' }
-divide 		= _* ('/' / 'over ' / 'between ') _*  { return '/' }
+// Note that operator aliases explicitly include a trailing space,
+// otherwise 'with' is a prefix code for 'without' and confuses the parser.
+add 		= _* ('+' / 'plus ' / 'with ') _*       { return '+' }
+subtract 	= _* ('-' / 'minus ' / 'without ') _*   { return '-' }
+multiply 	= _* ('*' / 'times ' / 'of ') _*        { return '*' }
+divide 		= _* ('/' / 'over ' / 'between ') _*    { return '/' }
+
+identifier 	= variable // / keyword
+
+assignment 	= v:variable _* ('=' / 'is'i / 'was'i) _* e:expression
+				{ return { assign: { variable: v, expression: e} }; }
+
+variable 	= common_variable
+
+common_prefix = ( 'a 'i / 'an 'i / 'the 'i / 'my 'i / 'your 'i)
+common_variable = prefix:common_prefix _* name:$([A-Za-z]+)
+				{ return prefix + '_' + name };
 
 /*
 

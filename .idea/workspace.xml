@@ -2,18 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8aad1e04-fa77-485a-8040-58eae540723e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/test/streamer_tests.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/fixtures/variables/proper_variables.rock" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/fixtures/variables/proper_variables.rock.out" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/parser.js" beforeDir="false" afterPath="$PROJECT_DIR$/parser.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/program.js" beforeDir="false" afterPath="$PROJECT_DIR$/program.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/satriani-bundle.js" beforeDir="false" afterPath="$PROJECT_DIR$/satriani-bundle.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/satriani.js" beforeDir="false" afterPath="$PROJECT_DIR$/satriani.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/fixtures/io/hello_world.rock" beforeDir="false" afterPath="$PROJECT_DIR$/test/fixtures/io/hello_world.rock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/fixtures/io/hello_world.rock.out" beforeDir="false" afterPath="$PROJECT_DIR$/test/fixtures/io/hello_world.rock.out" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/fixtures/variables/common_variables.rock" beforeDir="false" afterPath="$PROJECT_DIR$/test/fixtures/variables/common_variables.rock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/fixtures/variables/common_variables.rock.out" beforeDir="false" afterPath="$PROJECT_DIR$/test/fixtures/variables/common_variables.rock.out" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/streamer.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/parser_tests.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/test.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tokenizer.js" beforeDir="false" afterPath="$PROJECT_DIR$/tokenizer.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -27,65 +20,61 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test/fixtures/variables/common_variables.rock">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="440">
-              <caret line="20" column="10" lean-forward="true" selection-start-line="20" selection-start-column="10" selection-end-line="20" selection-end-column="10" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test/fixtures/io/hello_world.rock">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="44">
-              <caret line="2" column="16" selection-start-line="2" selection-start-column="16" selection-end-line="2" selection-end-column="16" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test/fixtures/io/hello_world.rock.out">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="66">
-              <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test/fixtures/io/hello_number.rock.out">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="22">
-              <caret line="1" selection-start-line="1" selection-end-line="1" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test/fixtures/io/hello_number.rock">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="6" selection-start-column="6" selection-end-column="6" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/tokenizer.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="286">
-              <caret line="33" column="13" lean-forward="true" selection-start-line="33" selection-start-column="13" selection-end-line="33" selection-end-column="13" />
+            <state relative-caret-position="1474">
+              <caret line="67" column="42" lean-forward="true" selection-start-line="67" selection-start-column="42" selection-end-line="67" selection-end-column="42" />
             </state>
           </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/test/parser_tests.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="247">
+              <caret line="12" column="9" selection-start-line="12" selection-start-column="9" selection-end-line="12" selection-end-column="9" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/test/streamer_tests.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="489">
+              <caret line="26" column="8" selection-start-line="26" selection-start-column="8" selection-end-line="26" selection-end-column="80" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/test/test.js">
+          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/parser.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="256">
-              <caret line="13" column="26" lean-forward="true" selection-start-line="13" selection-start-column="26" selection-end-line="13" selection-end-column="26" />
+            <state relative-caret-position="324">
+              <caret line="53" column="9" selection-start-line="53" selection-start-column="9" selection-end-line="53" selection-end-column="9" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$USER_HOME$/Desktop/parser.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-19262">
+              <caret line="19" column="34" lean-forward="true" selection-start-line="19" selection-start-column="34" selection-end-line="19" selection-end-column="34" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/test/fixtures/variables/proper_variables.rock.out">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="88">
+              <caret line="4" lean-forward="true" selection-start-line="4" selection-end-line="4" />
             </state>
           </provider>
         </entry>
@@ -93,8 +82,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/satriani.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="295">
-              <caret line="16" column="40" lean-forward="true" selection-start-line="16" selection-start-column="40" selection-end-line="16" selection-end-column="40" />
+            <state relative-caret-position="242">
+              <caret line="11" column="28" lean-forward="true" selection-start-line="11" selection-start-column="28" selection-end-line="11" selection-end-column="28" />
             </state>
           </provider>
         </entry>
@@ -111,8 +100,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/program.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="242">
-              <caret line="11" column="3" lean-forward="true" selection-start-line="11" selection-start-column="3" selection-end-line="11" selection-end-column="3" />
+            <state relative-caret-position="286">
+              <caret line="13" column="6" lean-forward="true" selection-start-line="13" selection-start-column="6" selection-end-line="13" selection-end-column="6" />
             </state>
           </provider>
         </entry>
@@ -133,6 +122,7 @@
       <find>maybe_call</find>
       <find>is_keyword</find>
       <find>console.log</find>
+      <find>is_whitespace</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -182,6 +172,8 @@
         <option value="$PROJECT_DIR$/test/fixtures/io/hello_world.rock.out" />
         <option value="$PROJECT_DIR$/test/fixtures/variables/common_variables.rock" />
         <option value="$PROJECT_DIR$/test/fixtures/variables/common_variables.rock.out" />
+        <option value="$PROJECT_DIR$/test/fixtures/variables/proper_variables.rock" />
+        <option value="$PROJECT_DIR$/test/fixtures/variables/proper_variables.rock.out" />
         <option value="$PROJECT_DIR$/program.js" />
         <option value="$PROJECT_DIR$/satriani.js" />
         <option value="$PROJECT_DIR$/tokenizer.js" />
@@ -189,10 +181,9 @@
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="1440" />
-    <option name="y" value="-157" />
-    <option name="width" value="1920" />
-    <option name="height" value="1057" />
+    <option name="y" value="23" />
+    <option name="width" value="1680" />
+    <option name="height" value="1002" />
   </component>
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
@@ -202,6 +193,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -252,7 +244,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -271,8 +262,8 @@
       <recent name="$PROJECT_DIR$/tests/io" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/test" />
       <recent name="$PROJECT_DIR$/test/fixtures/variables" />
+      <recent name="$PROJECT_DIR$/test" />
       <recent name="$PROJECT_DIR$/test/fixtures/math" />
       <recent name="$PROJECT_DIR$/test/fixtures/comments" />
       <recent name="$PROJECT_DIR$/test/fixtures/io" />
@@ -290,7 +281,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Mocha.parser">
+  <component name="RunManager" selected="Mocha.feature tests">
     <configuration name="failure tests" type="mocha-javascript-test-runner" temporary="true" nameIsGenerated="true">
       <node-interpreter>project</node-interpreter>
       <node-options />
@@ -368,8 +359,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Mocha.parser" />
         <item itemvalue="Mocha.feature tests" />
+        <item itemvalue="Mocha.parser" />
         <item itemvalue="Mocha.failure tests" />
         <item itemvalue="Mocha.streamer" />
         <item itemvalue="Mocha.input stream tests" />
@@ -389,32 +380,12 @@
       <workItem from="1547054721213" duration="11534000" />
       <workItem from="1547077822758" duration="3762000" />
       <workItem from="1547135669905" duration="9636000" />
-      <workItem from="1547220868325" duration="1792000" />
+      <workItem from="1547220868325" duration="5971000" />
+      <workItem from="1547247208811" duration="7605000" />
     </task>
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="parser - 2019.01.11 at 15h 47m 28s.xml">
-      <configuration name="parser" configurationId="mocha-javascript-test-runner" />
-    </history-entry>
-    <history-entry file="parser - 2019.01.11 at 15h 47m 57s.xml">
-      <configuration name="parser" configurationId="mocha-javascript-test-runner" />
-    </history-entry>
-    <history-entry file="parser - 2019.01.11 at 15h 48m 38s.xml">
-      <configuration name="parser" configurationId="mocha-javascript-test-runner" />
-    </history-entry>
-    <history-entry file="parser - 2019.01.11 at 15h 49m 03s.xml">
-      <configuration name="parser" configurationId="mocha-javascript-test-runner" />
-    </history-entry>
-    <history-entry file="parser - 2019.01.11 at 15h 49m 47s.xml">
-      <configuration name="parser" configurationId="mocha-javascript-test-runner" />
-    </history-entry>
-    <history-entry file="parser - 2019.01.11 at 15h 56m 44s.xml">
-      <configuration name="parser" configurationId="mocha-javascript-test-runner" />
-    </history-entry>
-    <history-entry file="parser - 2019.01.11 at 15h 57m 05s.xml">
-      <configuration name="parser" configurationId="mocha-javascript-test-runner" />
-    </history-entry>
     <history-entry file="parser - 2019.01.11 at 15h 58m 28s.xml">
       <configuration name="parser" configurationId="mocha-javascript-test-runner" />
     </history-entry>
@@ -424,20 +395,41 @@
     <history-entry file="parser - 2019.01.11 at 16h 03m 08s.xml">
       <configuration name="parser" configurationId="mocha-javascript-test-runner" />
     </history-entry>
+    <history-entry file="parser - 2019.01.11 at 16h 39m 59s.xml">
+      <configuration name="parser" configurationId="mocha-javascript-test-runner" />
+    </history-entry>
+    <history-entry file="feature_tests - 2019.01.11 at 16h 40m 10s.xml">
+      <configuration name="feature tests" configurationId="mocha-javascript-test-runner" />
+    </history-entry>
+    <history-entry file="feature_tests - 2019.01.11 at 16h 41m 04s.xml">
+      <configuration name="feature tests" configurationId="mocha-javascript-test-runner" />
+    </history-entry>
+    <history-entry file="feature_tests - 2019.01.11 at 16h 42m 12s.xml">
+      <configuration name="feature tests" configurationId="mocha-javascript-test-runner" />
+    </history-entry>
+    <history-entry file="feature_tests - 2019.01.11 at 16h 42m 26s.xml">
+      <configuration name="feature tests" configurationId="mocha-javascript-test-runner" />
+    </history-entry>
+    <history-entry file="feature_tests - 2019.01.11 at 16h 42m 39s.xml">
+      <configuration name="feature tests" configurationId="mocha-javascript-test-runner" />
+    </history-entry>
+    <history-entry file="feature_tests - 2019.01.11 at 16h 44m 15s.xml">
+      <configuration name="feature tests" configurationId="mocha-javascript-test-runner" />
+    </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="27444000" />
+    <option name="totallyTimeSpent" value="39228000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1440" y="-157" width="1920" height="1057" extended-state="6" />
+    <frame x="0" y="23" width="1920" height="1057" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.19325961" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.16850974" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32642487" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.41761658" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.41761658" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -453,6 +445,20 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="debuggerHistoryManager">
+    <expressions id="breakpointCondition">
+      <expression>
+        <expression-string>! id.toLowerCase</expression-string>
+        <language-id>JavaScript</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>! x.toLowerCase</expression-string>
+        <language-id>JavaScript</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+    </expressions>
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/README.md">
@@ -565,16 +571,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/spec.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="310">
-            <caret line="15" column="4" lean-forward="true" selection-start-line="15" selection-start-column="4" selection-end-line="15" selection-end-column="4" />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/streamer.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="484">
@@ -599,23 +595,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test/streamer_tests.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="352">
-          <caret line="26" column="8" selection-start-line="26" selection-start-column="8" selection-end-line="26" selection-end-column="80" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/test.js">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/parser_tests.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="295">
-          <caret line="30" column="59" lean-forward="true" selection-start-line="30" selection-start-column="59" selection-end-line="30" selection-end-column="59" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/test/fixtures/io/hello_number.rock.out">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="22">
@@ -637,13 +616,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/parser.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="256">
-          <caret line="13" column="26" lean-forward="true" selection-start-line="13" selection-start-column="26" selection-end-line="13" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/test/fixtures/io/hello_world.rock.out">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="66">
@@ -651,17 +623,34 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/satriani.js">
+    <entry file="file://$PROJECT_DIR$/test/fixtures/variables/common_variables.rock">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="295">
-          <caret line="16" column="40" lean-forward="true" selection-start-line="16" selection-start-column="40" selection-end-line="16" selection-end-column="40" />
+        <state relative-caret-position="440">
+          <caret line="20" column="10" selection-start-line="20" selection-start-column="10" selection-end-line="20" selection-end-column="10" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/program.js">
+    <entry file="file://$PROJECT_DIR$/spec.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="440">
+            <caret line="20" lean-forward="true" selection-start-line="20" selection-end-line="20" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/fixtures/variables/proper_variables.rock">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="242">
-          <caret line="11" column="3" lean-forward="true" selection-start-line="11" selection-start-column="3" selection-end-line="11" selection-end-column="3" />
+        <state relative-caret-position="154">
+          <caret line="7" column="14" selection-start-line="7" selection-start-column="14" selection-end-line="7" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/fixtures/variables/proper_variables.rock.out">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="88">
+          <caret line="4" lean-forward="true" selection-start-line="4" selection-end-line="4" />
         </state>
       </provider>
     </entry>
@@ -672,17 +661,55 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test/fixtures/variables/common_variables.rock">
+    <entry file="file://$PROJECT_DIR$/test/parser_tests.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="440">
-          <caret line="20" column="10" lean-forward="true" selection-start-line="20" selection-start-column="10" selection-end-line="20" selection-end-column="10" />
+        <state relative-caret-position="247">
+          <caret line="12" column="9" selection-start-line="12" selection-start-column="9" selection-end-line="12" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/streamer_tests.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="489">
+          <caret line="26" column="8" selection-start-line="26" selection-start-column="8" selection-end-line="26" selection-end-column="80" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/test.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/program.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="286">
+          <caret line="13" column="6" lean-forward="true" selection-start-line="13" selection-start-column="6" selection-end-line="13" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/satriani.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="242">
+          <caret line="11" column="28" lean-forward="true" selection-start-line="11" selection-start-column="28" selection-end-line="11" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/parser.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="324">
+          <caret line="53" column="9" selection-start-line="53" selection-start-column="9" selection-end-line="53" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Desktop/parser.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-19262">
+          <caret line="19" column="34" lean-forward="true" selection-start-line="19" selection-start-column="34" selection-end-line="19" selection-end-column="34" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/tokenizer.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="286">
-          <caret line="33" column="13" lean-forward="true" selection-start-line="33" selection-start-column="13" selection-end-line="33" selection-end-column="13" />
+        <state relative-caret-position="1474">
+          <caret line="67" column="42" lean-forward="true" selection-start-line="67" selection-start-column="42" selection-end-line="67" selection-end-column="42" />
         </state>
       </provider>
     </entry>

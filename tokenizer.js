@@ -61,7 +61,11 @@ module.exports = {
             return (COMMON_VARIABLE_PREFIXES.indexOf(id.toLowerCase()) >= 0);
         }
 
-        function read_ident() {
+        function is_proper_variable(id) {
+            return(! is_keyword(id) && /^[A-Z]/.test(id));
+
+        }
+        function read_ident(prefix = '') {
             let id = read_while(is_id);
             if (is_common_variable_prefix(id)) {
                 input.next();
@@ -76,6 +80,20 @@ module.exports = {
                 type: "op",
                 value: op
             };
+            if (is_proper_variable(id)) {
+                let c = (prefix ? prefix + '_' : '') + id;
+                let norb = peek(c);
+                console.log('Got ' + id + '; peek() is ' + JSON.stringify(norb));
+                console.trace(norb);
+                if (norb && norb.type == 'var' && is_proper_variable(norb.value)) {
+                    console.log('RECURSING') ;
+                    return read_next(c);
+                }
+                return {
+                    type: "var",
+                    value: c
+                }
+            }
             return {
                 type: is_keyword(id) ? "kw" : "var",
                 value: id.toLowerCase()
@@ -118,7 +136,7 @@ module.exports = {
         }
 
 
-        function read_next() {
+        function read_next(prefix) {
             read_while(is_whitespace);
             if (input.eof()) return null;
             const ch = input.peek();
@@ -127,7 +145,7 @@ module.exports = {
                 return read_next();
             }
             if (is_digit(ch)) return read_number();
-            if (is_id_start(ch)) return read_ident();
+            if (is_id_start(ch)) return read_ident(prefix);
             if (is_quote(ch)) return read_string();
             if (is_op_char(ch)) return {
                 type: "op",
@@ -135,9 +153,11 @@ module.exports = {
             };
             input.croak("Can't handle character: " + ch);
         }
-        function peek() {
-            return current || (current = read_next());
+
+        function peek(prefix) {
+            return current || (current = read_next(prefix));
         }
+
         function next() {
             let token = current;
             current = null;

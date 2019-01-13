@@ -47,15 +47,18 @@ divide 		= _* ('/' / 'over ' / 'between ') _*    { return '/' }
 lookup 	= v:variable
 	{ return { lookup: { variable: v } }; }
 
-variable = common_variable
+variable = common_variable / proper_variable
 
 assignment 	= v:variable _* ('=' / 'is 'i / 'was 'i) _* e:expression
 				{ return { assign: { variable: v, expression: e} }; }
 
 common_prefix = ( 'an'i / 'a'i / 'the'i / 'my'i / 'your'i)
 common_variable = prefix:common_prefix _+ name:$([A-Za-z]+)
-				{ return prefix.toLowerCase() + '_' + name.toLowerCase() };
+				{ { return (prefix + '_' + name).toLowerCase() }; };
 
+proper_noun = [A-Z][A-Za-z]*
+proper_variable = head:$(proper_noun (' ' $proper_noun)*)
+	{ return head.replace(/ /g, '_').toUpperCase()  }
 
 /*
 

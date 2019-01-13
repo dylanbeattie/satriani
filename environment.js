@@ -56,7 +56,8 @@ Environment.prototype = {
                  return result;
              case "number":
              case "string":
-                 return expr;
+             case "constant":
+                 return(expr);
              case "output":
                  env.output(evaluate(expr, env));
                  return null;

@@ -16,7 +16,19 @@ operation   = output / assignment / expression
 output      = ('say'i/'shout'i/'whisper'i/'scream'i) _+ e:expression
                 {return {'output': e}}
 
-simple_expression  =    pronoun / lookup / number / string
+simple_expression  =    pronoun / lookup / number / string / constant
+
+constant = null / true / false / mysterious
+
+true 	= ('true'i / 'ok'i / 'right'i / 'yes'i) { return { constant: true } }
+
+false 	= ('false'i / 'lies'i / 'wrong'i / 'no'i) { return { constant: false } }
+
+null 	= ('null'i / 'nothing'i / 'nowhere'i / 'nobody'i / 'empty'i / 'gone'i) { return { constant: null } }
+
+
+mysterious = 'mysterious'
+	{ return { constant: "mysterious" } }
 
 number      = n:$('-'?[0-9]+ ('.' [0-9]+)?)
                 { return {number: parseFloat(n)} }

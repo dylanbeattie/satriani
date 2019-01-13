@@ -30,7 +30,7 @@ function test_directory(directory, predicate) {
 
 function execute(source) {
     let result = "";
-    let interpreter = new satriani.Interpreter(function(...args) { result += args + "\n"; });
+    let interpreter = new satriani.Interpreter(function(s) { result += String(s)  + "\n"; });
     interpreter.interpret(source);
     return result;
 }

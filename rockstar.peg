@@ -43,10 +43,10 @@ multiplicative
 
 primary		=	simple_expression
 
-add 		= _* ('+' / 'plus' / 'with') _* { return '+' }
-subtract 	= _* ('-' / 'minus' / 'without') _* { return '-' }
-multiply 	= _* ('*' / 'times' / 'of') _*  { return '*' }
-divide 		= _* ('/' / 'over') _*  { return '/' }
+add 		= _* ('+' / 'plus ' / 'with ') _* { return '+' }
+subtract 	= _* ('-' / 'minus ' / 'without ') _* { return '-' }
+multiply 	= _* ('*' / 'times ' / 'of ') _*  { return '*' }
+divide 		= _* ('/' / 'over ' / 'between ') _*  { return '/' }
 
 /*
 

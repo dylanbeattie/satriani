@@ -15,8 +15,6 @@ output      = ('say'i/'shout'i/'whisper'i/'scream'i) _+ e:expression
 
 simple_expression  =    number / string
 
-expression  = additive
-
 number      = n:$('-'?[0-9]+ ('.' [0-9]+)?)
                 { return {number: parseFloat(n)} }
 
@@ -25,23 +23,19 @@ string      = '"' s:$[^"]+ '"'
 
 blank_line  = _* {return {blank:  ''}}
 
-additive
-  = first:multiplicative rest:((add / subtract) multiplicative)+ {
-    return rest.reduce(function(memo, curr) {
-      return { binary: { op: curr[0], left: memo, right: curr[1]} };
-    }, first);
-  }
-  / multiplicative
+expression  = sum
 
-multiplicative
-  = first:primary rest:((multiply / divide) primary)+ {
-    return rest.reduce(function(memo, curr) {
-       return { binary: { op: curr[0], left: memo, right: curr[1]} };
-    }, first);
-  }
-  / primary
+sum         = first:product rest:((add / subtract) product)+
+                { return rest.reduce(function(memo, curr) {
+                      return { binary: { op: curr[0], left: memo, right: curr[1]} };
+                }, first); }
+            / product
 
-primary		=	simple_expression
+product     = first:simple_expression rest:((multiply / divide) simple_expression)+
+                { return rest.reduce(function(memo, curr) {
+                    return { binary: { op: curr[0], left: memo, right: curr[1]} };
+                }, first); }
+            / simple_expression
 
 add 		= _* ('+' / 'plus ' / 'with ') _* { return '+' }
 subtract 	= _* ('-' / 'minus ' / 'without ') _* { return '-' }

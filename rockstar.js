@@ -179,16 +179,12 @@ function peg$parse(input, options) {
       peg$c35 = peg$classExpectation(["\""], true, false),
       peg$c36 = function(s) { return {string: s}},
       peg$c37 = function() {return {blank:  ''}},
-      peg$c38 = function(first, rest) {
-          return rest.reduce(function(memo, curr) {
-            return { binary: { op: curr[0], left: memo, right: curr[1]} };
-          }, first);
-        },
-      peg$c39 = function(first, rest) {
-          return rest.reduce(function(memo, curr) {
-             return { binary: { op: curr[0], left: memo, right: curr[1]} };
-          }, first);
-        },
+      peg$c38 = function(first, rest) { return rest.reduce(function(memo, curr) {
+                            return { binary: { op: curr[0], left: memo, right: curr[1]} };
+                      }, first); },
+      peg$c39 = function(first, rest) { return rest.reduce(function(memo, curr) {
+                          return { binary: { op: curr[0], left: memo, right: curr[1]} };
+                      }, first); },
       peg$c40 = "+",
       peg$c41 = peg$literalExpectation("+", false),
       peg$c42 = "plus ",
@@ -550,7 +546,7 @@ function peg$parse(input, options) {
   function peg$parseoperation() {
     var s0;
 
-    s0 = peg$parseadditive();
+    s0 = peg$parsesum();
     if (s0 === peg$FAILED) {
       s0 = peg$parseoutput();
     }
@@ -608,7 +604,7 @@ function peg$parse(input, options) {
         s2 = peg$FAILED;
       }
       if (s2 !== peg$FAILED) {
-        s3 = peg$parseadditive();
+        s3 = peg$parsesum();
         if (s3 !== peg$FAILED) {
           peg$savedPos = s0;
           s1 = peg$c24(s3);
@@ -841,11 +837,11 @@ function peg$parse(input, options) {
     return s0;
   }
 
-  function peg$parseadditive() {
+  function peg$parsesum() {
     var s0, s1, s2, s3, s4, s5;
 
     s0 = peg$currPos;
-    s1 = peg$parsemultiplicative();
+    s1 = peg$parseproduct();
     if (s1 !== peg$FAILED) {
       s2 = [];
       s3 = peg$currPos;
@@ -854,7 +850,7 @@ function peg$parse(input, options) {
         s4 = peg$parsesubtract();
       }
       if (s4 !== peg$FAILED) {
-        s5 = peg$parsemultiplicative();
+        s5 = peg$parseproduct();
         if (s5 !== peg$FAILED) {
           s4 = [s4, s5];
           s3 = s4;
@@ -875,7 +871,7 @@ function peg$parse(input, options) {
             s4 = peg$parsesubtract();
           }
           if (s4 !== peg$FAILED) {
-            s5 = peg$parsemultiplicative();
+            s5 = peg$parseproduct();
             if (s5 !== peg$FAILED) {
               s4 = [s4, s5];
               s3 = s4;
@@ -904,13 +900,13 @@ function peg$parse(input, options) {
       s0 = peg$FAILED;
     }
     if (s0 === peg$FAILED) {
-      s0 = peg$parsemultiplicative();
+      s0 = peg$parseproduct();
     }
 
     return s0;
   }
 
-  function peg$parsemultiplicative() {
+  function peg$parseproduct() {
     var s0, s1, s2, s3, s4, s5;
 
     s0 = peg$currPos;

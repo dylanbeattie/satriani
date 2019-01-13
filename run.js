@@ -1,0 +1,20 @@
+const fs = require('fs');
+const rockstar = require('./rockstar.js');
+const environment = require('./environment.js');
+
+var sourceFilePath = process.argv[2];
+fs.readFile(sourceFilePath, 'utf8', (err, data) => {;
+    if (err) throw err;
+    try {
+        let program = rockstar.parse(data);
+        console.log(JSON.stringify(program, null, 2));
+        console.log('---------------------------------------------------');
+
+        let env = new environment.Environment();
+        // env.output = (...args) => console.log(args);
+        env.run(program);
+        // console.log(JSON.stringify(tree,null,2));
+    } catch (e) {
+        // console.log(JSON.stringify(e,null,2));
+    }
+});

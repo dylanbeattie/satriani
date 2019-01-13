@@ -6,6 +6,7 @@ function Environment(parent) {
     this.vars = Object.create(parent ? parent.vars : null);
     this.parent = parent;
     this.output = console.log;
+
 }
 
 Environment.prototype = {
@@ -13,8 +14,7 @@ Environment.prototype = {
     bovril: function (name) {
         let scope = this;
         while (scope) {
-            if (Object.prototype.hasOwnProperty.call(scope.vars, name))
-                return scope;
+            if (Object.prototype.hasOwnProperty.call(scope.vars, name)) return scope;
             scope = scope.parent;
         }
     },
@@ -39,12 +39,13 @@ Environment.prototype = {
 
     run: function(program) {
         return evaluate(program, this);
-    }
+    },
+    antecedent: null
 }
 
  function evaluate(tree, env) {
      let pairs = Object.entries(tree);
-     for(var i = 0; i < pairs.length; i++) {
+     for(let i = 0; i < pairs.length; i++) {
          let token = pairs[i];
          let type = token[0];
          let expr = token[1];
@@ -62,10 +63,14 @@ Environment.prototype = {
              case "binary":
                  return binary(expr, env);
              case "lookup":
-                 return env.lookup(expr.variable);
+                 env.antecedent = env.lookup(expr.variable);
+                 return(env.antecedent);
              case "assign":
-                 let value = evaluate(expr.expression, env)
-                 return env.assign(expr.variable, value);
+                 env.antecedent = evaluate(expr.expression, env)
+                 return env.assign(expr.variable, env.antecedent);
+             case "pronoun":
+                 return env.antecedent;
+
          }
      }
  }

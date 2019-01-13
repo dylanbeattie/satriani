@@ -59,8 +59,34 @@ Environment.prototype = {
              case "output":
                  env.output(evaluate(expr, env));
                  return null;
+             case "binary":
+                 return binary(expr, env);
          }
      }
+ }
+
+ function binary(b, env) {
+    let l = evaluate(b.left, env);
+    let r  = evaluate(b.right, env);
+    switch(b.op) {
+        case '+': return l + r;
+        case '-': return l - r;
+        case '/': return l / r;
+        case '*': return l * r;
+        // case "-": return num(a) - num(b);
+        // case "*": return num(a) * num(b);
+        // case "/": return num(a) / div(b);
+        // case "%": return num(a) % div(b);
+        // case "&&": return a !== false && b;
+        // case "||": return a !== false ? a : b;
+        // case "<": return num(a) < num(b);
+        // case ">": return num(a) > num(b);
+        // case "<=": return num(a) <= num(b);
+        // case ">=": return num(a) >= num(b);
+        // case "==": return a === b;
+        // case "!=": return a !== b;
+        //
+    }
  }
 function ope() {
     Object.entries(pair).forEach(token => {

@@ -16,7 +16,9 @@ operation   = output / assignment / expression
 output      = ('say'i/'shout'i/'whisper'i/'scream'i) _+ e:expression
                 {return {'output': e}}
 
-simple_expression  =    pronoun / lookup / number / string / constant
+simple_expression  =    pronoun / lookup / literal
+
+literal = number / string / constant / poetic_number
 
 constant = null / true / false / mysterious
 
@@ -77,8 +79,24 @@ common_prefix = ( 'an'i / 'a'i / 'the'i / 'my'i / 'your'i)
 common_variable = prefix:common_prefix _+ name:$([A-Za-z]+)
 				{ return (prefix + '_' + name).toLowerCase() };
 
-assignment 	= v:variable _* ('=' / 'is 'i / 'was 'i) _* e:expression
+assignment 	= v:variable ('\'s' / (_* ('=' / 'is 'i / 'was 'i / 'were 'i))) _* e:literal
 				{ return { assign: { variable: v, expression: e} }; }
+
+word_break = ( _ / [\',;:?!])+
+word = [A-Za-z]+
+
+poetic_number = integral:poetic_digits decimal:poetic_decimal? word_break*
+	{
+    	return { 'number' : parseFloat(integral + (decimal ? '.' + decimal : '')) }
+	}
+
+poetic_decimal = '.' _* d:poetic_digits { return d }
+
+poetic_digits = head:poetic_digit word_break tail:poetic_digits
+	{ return head + tail }
+    / d:poetic_digit { return d}
+
+poetic_digit = word:[A-Za-z]+ { return (word.length%10).toString() }
 
 variable = common_variable / proper_variable
 

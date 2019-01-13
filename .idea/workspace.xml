@@ -2,11 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8aad1e04-fa77-485a-8040-58eae540723e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/test/fixtures/variables/proper_variables.rock" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/fixtures/variables/proper_variables.rock.out" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/rockstar.js" beforeDir="false" afterPath="$PROJECT_DIR$/rockstar.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/rockstar.peg" beforeDir="false" afterPath="$PROJECT_DIR$/rockstar.peg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/fixtures/variables/proper_variables.rock" beforeDir="false" afterPath="$PROJECT_DIR$/test/fixtures/variables/proper_variables.rock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/fixtures/variables/proper_variables.rock.out" beforeDir="false" afterPath="$PROJECT_DIR$/test/fixtures/variables/proper_variables.rock.out" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -31,8 +30,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/test/fixtures/variables/proper_variables.rock">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="176">
-              <caret line="8" column="19" lean-forward="true" selection-start-line="8" selection-start-column="19" selection-end-line="8" selection-end-column="19" />
+            <state relative-caret-position="242">
+              <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
             </state>
           </provider>
         </entry>
@@ -40,8 +39,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/test/fixtures/variables/proper_variables.rock.out">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="66">
-              <caret line="3" column="1" lean-forward="true" selection-start-line="3" selection-start-column="1" selection-end-line="3" selection-end-column="1" />
+            <state relative-caret-position="88">
+              <caret line="4" column="6" lean-forward="true" selection-start-line="4" selection-start-column="6" selection-end-line="4" selection-end-column="6" />
             </state>
           </provider>
         </entry>
@@ -49,8 +48,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/rockstar.peg">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="337">
-              <caret line="16" lean-forward="true" selection-start-line="16" selection-end-line="16" />
+            <state relative-caret-position="154">
+              <caret line="7" column="56" selection-start-line="7" selection-start-column="52" selection-end-line="7" selection-end-column="56" />
             </state>
           </provider>
         </entry>
@@ -181,8 +180,8 @@
         <option value="$PROJECT_DIR$/test/failures/invalid_comments.rock.err" />
         <option value="$PROJECT_DIR$/run.js" />
         <option value="$PROJECT_DIR$/environment.js" />
-        <option value="$PROJECT_DIR$/test/fixtures/variables/proper_variables.rock" />
         <option value="$PROJECT_DIR$/test/fixtures/variables/proper_variables.rock.out" />
+        <option value="$PROJECT_DIR$/test/fixtures/variables/proper_variables.rock" />
         <option value="$PROJECT_DIR$/rockstar.peg" />
       </list>
     </option>
@@ -445,7 +444,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="46510000" />
+    <option name="totallyTimeSpent" value="46772000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -758,22 +757,22 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/test/fixtures/variables/proper_variables.rock.out">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="66">
-          <caret line="3" column="1" lean-forward="true" selection-start-line="3" selection-start-column="1" selection-end-line="3" selection-end-column="1" />
+        <state relative-caret-position="88">
+          <caret line="4" column="6" lean-forward="true" selection-start-line="4" selection-start-column="6" selection-end-line="4" selection-end-column="6" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/test/fixtures/variables/proper_variables.rock">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="8" column="19" lean-forward="true" selection-start-line="8" selection-start-column="19" selection-end-line="8" selection-end-column="19" />
+        <state relative-caret-position="242">
+          <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/rockstar.peg">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="337">
-          <caret line="16" lean-forward="true" selection-start-line="16" selection-end-line="16" />
+        <state relative-caret-position="154">
+          <caret line="7" column="56" selection-start-line="7" selection-start-column="52" selection-end-line="7" selection-end-column="56" />
         </state>
       </provider>
     </entry>

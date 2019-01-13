@@ -8,7 +8,7 @@ _           = ((' ' / '\t')+) / comment
 statement   = _* s:(operation / blank_line) ','? _* '\n'
                 { return s }
 
-operation   = assignment / expression / output
+operation   = output / assignment / expression
 
 output      = ('say'i/'shout'i/'whisper'i/'scream'i) _+ e:expression
                 {return {'output': e}}
@@ -47,18 +47,22 @@ divide 		= _* ('/' / 'over ' / 'between ') _*    { return '/' }
 lookup 	= v:variable
 	{ return { lookup: { variable: v } }; }
 
-variable = common_variable / proper_variable
+common_prefix = ( 'an'i / 'a'i / 'the'i / 'my'i / 'your'i)
+common_variable = prefix:common_prefix _+ name:$([A-Za-z]+)
+				{ return (prefix + '_' + name).toLowerCase() };
 
 assignment 	= v:variable _* ('=' / 'is 'i / 'was 'i) _* e:expression
 				{ return { assign: { variable: v, expression: e} }; }
 
-common_prefix = ( 'an'i / 'a'i / 'the'i / 'my'i / 'your'i)
-common_variable = prefix:common_prefix _+ name:$([A-Za-z]+)
-				{ { return (prefix + '_' + name).toLowerCase() }; };
+variable = common_variable / proper_variable
 
 proper_noun = [A-Z][A-Za-z]*
 proper_variable = head:$(proper_noun (' ' $proper_noun)*)
 	{ return head.replace(/ /g, '_').toUpperCase()  }
+
+
+
+
 
 /*
 

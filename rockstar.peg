@@ -1,0 +1,108 @@
+program     = head:statement tail:((_* '\n') statement)*
+                {
+                return { program: [head].concat(tail.map(item => item[1]))
+                 }
+                }
+
+comment     = '(' [^)]* ')'
+
+_           = ((' ' / '\t')+) / comment
+
+statement   = _* s:(operation / blank_line)
+                { return s }
+
+operation   = output / assignment / expression
+
+output      = ('say'i/'shout'i/'whisper'i/'scream'i) _+ e:expression
+                {return {'output': e}}
+
+simple_expression  =    pronoun / lookup / literal
+
+literal = number / string / constant / poetic_number
+
+constant = null / true / false / mysterious
+
+true 	= ('true'i / 'ok'i / 'right'i / 'yes'i) { return { constant: true } }
+
+false 	= ('false'i / 'lies'i / 'wrong'i / 'no'i) { return { constant: false } }
+
+null 	= ('null'i / 'nothing'i / 'nowhere'i / 'nobody'i / 'empty'i / 'gone'i) { return { constant: null } }
+
+
+mysterious = 'mysterious'
+	{ return { constant: "mysterious" } }
+
+number      = n:$('-'?[0-9]+ ('.' [0-9]+)?)
+                { return {number: parseFloat(n)} }
+
+string      = '"' s:$[^"]+ '"'
+                { return {string: s}}
+
+blank_line  = _* {return {blank:  ''}}
+
+expression  = sum
+
+sum         = first:product rest:((add / subtract) product)+
+                { return rest.reduce(function(memo, curr) {
+                      return { binary: { op: curr[0], left: memo, right: curr[1]} };
+                }, first); }
+            / product
+
+product     = first:simple_expression rest:((multiply / divide) simple_expression)+
+                { return rest.reduce(function(memo, curr) {
+                    return { binary: { op: curr[0], left: memo, right: curr[1]} };
+                }, first); }
+            / simple_expression
+
+// Note that operator aliases explicitly include a trailing space,
+// otherwise 'with' is a prefix code for 'without' and confuses the parser.
+add 		= _* ('+' / 'plus ' / 'with ') _*       { return '+' }
+subtract 	= _* ('-' / 'minus ' / 'without ') _*   { return '-' }
+multiply 	= _* ('*' / 'times ' / 'of ') _*        { return '*' }
+divide 		= _* ('/' / 'over ' / 'between ') _*    { return '/' }
+
+pronoun = pronoun:(
+    // Longest pronouns first to avoid prefix coding errors.
+    // 4-letter pronouns
+    'they'i / 'them'i
+    // 3-letter pronouns
+    / 'she'i / 'him'i / 'her'i / 'hir'i / 'zie'i / 'zir'i / 'xem'i / 'ver'i
+    // 2-letter pronouns
+    / 'ze'i / 've'i / 'xe'i / 'it'i / 'he'i
+    )
+    { return { pronoun: pronoun.toLowerCase() } }
+
+lookup 	= v:variable
+	{ return { lookup: { variable: v } }; }
+
+common_prefix = ( 'an'i / 'a'i / 'the'i / 'my'i / 'your'i)
+common_variable = prefix:common_prefix _+ name:$([A-Za-z]+)
+				{ return (prefix + '_' + name).toLowerCase() };
+
+assignment 	= v:variable ('\'s' / (_* ('=' / 'is 'i / 'was 'i / 'were 'i))) _* e:literal
+				{ return { assign: { variable: v, expression: e} }; }
+
+word_break = (_ / [^\nA-Za-z])+
+word = [A-Za-z]+
+
+poetic_number = integral:poetic_digits decimal:poetic_decimal? word_break*
+	{
+    	return { 'number' : parseFloat(integral + (decimal ? '.' + decimal : '')) }
+	}
+
+poetic_decimal = '.' _* d:poetic_digits { return d }
+
+poetic_digits = head:poetic_digit word_break tail:poetic_digits
+	{ return head + tail }
+    / d:poetic_digit { return d}
+
+poetic_digit = word:[A-Za-z]+ { return (word.length%10).toString() }
+
+variable = common_variable / proper_variable
+
+proper_noun = [A-Z][A-Za-z]*
+proper_variable = head:$(proper_noun (' ' $proper_noun)*)
+	{ return head.replace(/ /g, '_').toUpperCase()  }
+
+
+

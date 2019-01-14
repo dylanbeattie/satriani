@@ -30,7 +30,7 @@ function test_directory(directory, predicate) {
 
 function execute(source) {
     let result = "";
-    let interpreter = new satriani.Interpreter(function(...args) { result += args + "\n"; });
+    let interpreter = new satriani.Interpreter(function(s) { result += String(s)  + "\n"; });
     interpreter.interpret(source);
     return result;
 }
@@ -41,7 +41,7 @@ function execute_and_compare_output(file) {
     let targetFile = file + '.out';
     let target = fs.existsSync(targetFile) ? fs.readFileSync(targetFile, 'utf8') : '';
     let actual = execute(source);
-    assert.equal(target,actual);
+    assert.equal(actual, target);
 }
 
 

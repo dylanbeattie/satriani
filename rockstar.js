@@ -302,8 +302,8 @@ function peg$parse(input, options) {
       peg$c151 = "were ",
       peg$c152 = peg$literalExpectation("were ", true),
       peg$c153 = function(v, e) { return { assign: { variable: v, expression: e} }; },
-      peg$c154 = /^[',;:?!]/,
-      peg$c155 = peg$classExpectation(["'", ",", ";", ":", "?", "!"], false, false),
+      peg$c154 = /^[^\nA-Za-z]/,
+      peg$c155 = peg$classExpectation(["\n", ["A", "Z"], ["a", "z"]], true, false),
       peg$c156 = function(integral, decimal) {
           	return { 'number' : parseFloat(integral + (decimal ? '.' + decimal : '')) }
       	},

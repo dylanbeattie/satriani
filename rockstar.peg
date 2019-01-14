@@ -82,7 +82,7 @@ common_variable = prefix:common_prefix _+ name:$([A-Za-z]+)
 assignment 	= v:variable ('\'s' / (_* ('=' / 'is 'i / 'was 'i / 'were 'i))) _* e:literal
 				{ return { assign: { variable: v, expression: e} }; }
 
-word_break = ( _ / [\',;:?!])+
+word_break = (_ / [^\nA-Za-z])+
 word = [A-Za-z]+
 
 poetic_number = integral:poetic_digits decimal:poetic_decimal? word_break*

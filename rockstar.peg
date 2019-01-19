@@ -83,7 +83,31 @@ number      = n:$('-'?[0-9]+ ('.' [0-9]+)?) '.'?
 string      = '"' s:$[^"]* '"'
                 { return {string: s}}
 
-expression = lhs:arithmetic _ c:comparator _ rhs:arithmetic
+expression = boolean
+
+boolean = or
+
+or = lhs:and _ 'or' _ rhs:or {
+	return { 'or': {
+        lhs: lhs,
+        rhs: rhs
+    } }
+ }
+ /and
+
+and = lhs:not _ 'and' _ rhs:and {
+	return { 'and': {
+        lhs: lhs,
+        rhs: rhs
+    } }
+ }
+ /
+ not
+
+ not = 'not' _ e:comparison { return { 'not': { expression: e} } }
+ 	/ comparison
+
+comparison = lhs:arithmetic _ c:comparator _ rhs:arithmetic
   {
       return {
           comparison: {

@@ -130,8 +130,14 @@ Environment.prototype = {
                      case "ge": return (lhs >= rhs);
                      case "gt": return(lhs > rhs);
                  }
+             case "and":
+                 return (evaluate(expr.lhs, env) && evaluate(expr.rhs, env));
+             case "or":
+                 return (evaluate(expr.lhs, env) || evaluate(expr.rhs, env));
+             case "not":
+                 return(! evaluate(expr.expression, env));
              default:
-                 throw new Error("Sorry - I don't know how to evaluate this." + JSON.stringify(tree))
+                 throw new Error("Sorry - I don't know how to evaluate this: " + JSON.stringify(tree))
 
          }
      }

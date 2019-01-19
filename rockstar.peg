@@ -39,7 +39,7 @@ number      = n:$('-'?[0-9]+ ('.' [0-9]+)?) '.'?
                 { return {number: parseFloat(n) } }
 
 
-string      = '"' s:$[^"]+ '"'
+string      = '"' s:$[^"]* '"'
                 { return {string: s}}
 
 blank_line  = _* {return {blank:  ''}}

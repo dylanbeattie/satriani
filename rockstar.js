@@ -712,9 +712,6 @@ function peg$parse(input, options) {
     s0 = peg$parseoutput();
     if (s0 === peg$FAILED) {
       s0 = peg$parseassignment();
-      if (s0 === peg$FAILED) {
-        s0 = peg$parsesum();
-      }
     }
 
     return s0;

@@ -11,7 +11,7 @@ _           = ((' ' / '\t')+) / comment
 statement   = _* s:(operation / blank_line)
                 { return s }
 
-operation   = output / assignment / expression
+operation   = output / assignment
 
 output      = ('say'i/'shout'i/'whisper'i/'scream'i) _+ e:expression
                 {return {'output': e}}

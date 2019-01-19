@@ -51,7 +51,7 @@ Environment.prototype = {
          let type = token[0];
          let expr = token[1];
          switch (type) {
-             case "program":
+             case "sequence":
                  let result = false;
                  expr.forEach(e => result = evaluate(e, env));
                  return result;
@@ -102,6 +102,14 @@ Environment.prototype = {
                      default:
                          return env.assign(expr.variable, (old_decrement_value - expr.multiple));
                  }
+             case "conditional":
+
+                 if(evaluate(expr.condition, env)) {
+                     return evaluate(expr.consequent, env)
+                 } else if (expr.alternate) {
+                     return evaluate(expr.alternate, env);
+                 }
+                 return null;
              case "comparison":
                  let lhs = evaluate(expr.lhs);
                  let rhs = evaluate(expr.rhs);

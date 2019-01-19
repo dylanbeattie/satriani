@@ -1,7 +1,8 @@
-My heart is 5
-say it
 
-it is 1
-say my heart
-it is 2
-say my heart
+if false
+say "hello"
+say "world"
+else
+say "goodbye"
+say "everyone"
+(end block)

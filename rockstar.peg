@@ -1,25 +1,47 @@
-program     = p:statement *
-	{ return { program: p } }
+program     = p:line * { return { sequence: p.filter(item => item) } }
 
+line = _* s:statement EOL+ { return s }
+	/
+    EOL { return null }
+
+whitespace = [' \t']
 comment     = '(' [^)]* ')'
+_           = (whitespace / comment)+
 
-_           = ((' ' / '\t')+) / comment
-
-noise 	= (_ / [;,?!&])
+noise 	= (_ / [;,?!&.])
 EOL = 	noise* '\n'
 
-statement   = _* s:(operation / blank_line) EOL
-                { return s }
+statement   = conditional / operation
 
-blank_line  = _* {return {blank:  ''}}
+operation   = output / assignment / crement
 
-operation   = output / assignment / crement / conditional
+continuation = EOL _* s:statement { return s };
 
-conditional = 'if' _ e:expression _
+block 	= head:statement tail:(continuation)+
+		{
+        	return { sequence: Array(head).concat(tail) }
+        }
+		/ s:statement { return s }
 
-			/ 'else'
+consequent 	= _ s:statement { return s }
+			/ EOL s:block { return s }
 
-output      = ('say'i/'shout'i/'whisper'i/'scream'i) _+ e:expression
+alternate 	= _ 'else'i _ a:statement { return a }
+			/ EOL 'else'i _ a:statement { return a }
+			/ EOL 'else'i EOL a:block { return a }
+            / EOL { return null }
+
+conditional = 'if'i _ e:expression c:consequent a:alternate?  {
+        	return {
+            	'conditional': {
+                	'condition' : e,
+                    'consequent' : c,
+                    'alternate' : a
+                }
+           };
+       }
+
+output      = ('say'i/'shout'i/'whisper'i/'scream'i) _ e:expression
                 {return {'output': e}}
 
 simple_expression  =   constant / lookup / literal / pronoun
@@ -171,8 +193,3 @@ decrement = 'knock'i _+ v:variable _+ t:('down'i noise*)+
             multiple: t.length
         }
     }; }
-
-
-
-
-

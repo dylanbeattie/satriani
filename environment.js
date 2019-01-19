@@ -40,7 +40,8 @@ Environment.prototype = {
     run: function(program) {
         return evaluate(program, this);
     },
-    antecedent: null
+    pronoun_alias: null,
+    pronoun_value: null,
 }
 
  function evaluate(tree, env) {
@@ -57,20 +58,29 @@ Environment.prototype = {
              case "number":
              case "string":
              case "constant":
-                 return(expr);
+                 return (expr);
              case "output":
                  env.output(evaluate(expr, env));
                  return null;
              case "binary":
                  return binary(expr, env);
              case "lookup":
-                 env.antecedent = env.lookup(expr.variable);
-                 return(env.antecedent);
+                 env.pronoun_alias = expr.variable;
+                 return env.pronoun_value = env.lookup(expr.variable);
              case "assign":
-                 env.antecedent = evaluate(expr.expression, env)
-                 return env.assign(expr.variable, env.antecedent);
+                 let alias = "";
+                 let value = evaluate(expr.expression, env);
+                 if (expr.variable.pronoun) {
+                     alias = env.pronoun_alias;
+                     console.debug('Assigning to ' + alias + ' via pronoun');
+                 } else {
+                     alias = expr.variable;
+                     env.pronoun_alias = alias;
+                     env.pronoun_value = value;
+                 }
+                 return env.assign(alias, value);
              case "pronoun":
-                 return env.antecedent;
+                 return env.pronoun_value;
 
          }
      }

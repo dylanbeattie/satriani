@@ -81,6 +81,9 @@ common_variable = prefix:common_prefix _+ name:$([A-Za-z]+)
 
 assignment 	= v:variable ('\'s' / (_* ('=' / 'is 'i / 'was 'i / 'were 'i))) _* e:literal
 				{ return { assign: { variable: v, expression: e} }; }
+              / 'put'i _+ e:expression _+ 'into'i _+ v:variable
+				{ return { assign: { variable: v, expression: e} }; }
+
 
 poetic_number = poetic_digit_separator* n:poetic_digits poetic_digit_separator* d:poetic_decimal? poetic_digit_separator*
 
@@ -110,7 +113,7 @@ poetic_decimal_digits =
 poetic_digit = t:[A-Za-z']+
 	{ return (t.filter(c => /[A-Za-z]/.test(c)).length%10).toString()}
 
-variable = common_variable / proper_variable
+variable = common_variable / proper_variable / pronoun
 
 proper_noun = [A-Z][A-Za-z]*
 proper_variable = head:$(proper_noun (' ' $proper_noun)*)

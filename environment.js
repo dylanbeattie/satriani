@@ -102,6 +102,16 @@ Environment.prototype = {
                      default:
                          return env.assign(expr.variable, (old_decrement_value - expr.multiple));
                  }
+             case "comparison":
+                 let lhs = evaluate(expr.lhs);
+                 let rhs = evaluate(expr.rhs);
+                 switch(expr.comparator) {
+                     case "eq": return (lhs == rhs);
+                     case "lt": return (lhs < rhs);
+                     case "le": return (lhs <= rhs);
+                     case "ge": return (lhs >= rhs);
+                     case "gt": return(lhs > rhs);
+                 }
              default:
                  throw new Error("Sorry - I don't know how to evaluate this." + JSON.stringify(tree))
 

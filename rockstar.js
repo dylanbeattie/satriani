@@ -816,9 +816,6 @@ function peg$parse(input, options) {
       s0 = peg$parsenumber();
       if (s0 === peg$FAILED) {
         s0 = peg$parsestring();
-        if (s0 === peg$FAILED) {
-          s0 = peg$parsepoetic_number();
-        }
       }
     }
 
@@ -2038,6 +2035,9 @@ function peg$parse(input, options) {
         }
         if (s3 !== peg$FAILED) {
           s4 = peg$parseliteral();
+          if (s4 === peg$FAILED) {
+            s4 = peg$parsepoetic_number();
+          }
           if (s4 !== peg$FAILED) {
             peg$savedPos = s0;
             s1 = peg$c154(s1, s4);

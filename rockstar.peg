@@ -18,7 +18,7 @@ output      = ('say'i/'shout'i/'whisper'i/'scream'i) _+ e:expression
 
 simple_expression  =   constant / lookup / literal / pronoun
 
-literal = constant / number / string / poetic_number
+literal = constant / number / string
 
 constant = null / true / false / mysterious
 
@@ -83,16 +83,16 @@ common_prefix = ( 'an'i / 'a'i / 'the'i / 'my'i / 'your'i)
 common_variable = prefix:common_prefix _+ name:$([A-Za-z]+)
 				{ return (prefix + '_' + name).toLowerCase() };
 
-assignment 	=   v:variable ('\'s' / (_* ('=' / 'is 'i / 'was 'i / 'were 'i))) _* e:literal
-				    { return { assign: { variable: v, expression: e} }; }
-             / v:variable _+ 'says'i _+ e:poetic_string
-				    { return { assign: { variable: v, expression: e} }; }
-             / 'put'i _+ e:expression _+ 'into'i _+ v:variable
-				    { return { assign: { variable: v, expression: e} }; }
+assignment 	= v:variable ('\'s' / (_* ('=' / 'is 'i / 'was 'i / 'were 'i))) _* e:(literal / poetic_number)
+				{ return { assign: { variable: v, expression: e} }; }
+              /
+              v:variable _+ 'says'i _+ e:poetic_string
+              	{ return { assign: { variable: v, expression: e} }; }
+              / 'put'i _+ e:expression _+ 'into'i _+ v:variable
+				{ return { assign: { variable: v, expression: e} }; }
 
 poetic_string = s:$[^\n]*
 	{ return { string: s} }
-
 
 poetic_number = poetic_digit_separator* n:poetic_digits poetic_digit_separator* d:poetic_decimal? poetic_digit_separator*
 

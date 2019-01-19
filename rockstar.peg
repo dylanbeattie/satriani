@@ -34,6 +34,9 @@ mysterious = 'mysterious'
 
 number      = n:$('-'?[0-9]+ ('.' [0-9]+)?) '.'?
                 { return {number: parseFloat(n)} }
+			/
+            	n:$('.' [0-9]+)
+                { return {number: parseFloat(n) } }
 
 string      = '"' s:$[^"]+ '"'
                 { return {string: s}}

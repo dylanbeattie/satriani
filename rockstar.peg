@@ -1,7 +1,7 @@
 program     = p:line * { return { sequence: p.filter(item => item) } }
 
 line = _* s:statement EOL+ { return s }
-	/
+  /
     EOL { return null }
 
 whitespace = [' \t']
@@ -11,35 +11,50 @@ _           = (whitespace / comment)+
 noise 	= (_ / [;,?!&.])
 EOL = 	noise* '\n'
 
-statement   = conditional / operation
+statement   = loop / conditional / operation
 
-operation   = output / assignment / crement
+operation   = output / crement / assignment
 
 continuation = EOL _* s:statement { return s };
 
 block 	= head:statement tail:(continuation)+
-		{
-        	return { sequence: Array(head).concat(tail) }
+    {
+          return { sequence: Array(head).concat(tail) }
         }
-		/ s:statement { return s }
+    / s:statement { return s }
 
 consequent 	= _ s:statement { return s }
-			/ EOL s:block { return s }
+      / EOL s:block { return s }
 
 alternate 	= _ 'else'i _ a:statement { return a }
-			/ EOL 'else'i _ a:statement { return a }
-			/ EOL 'else'i EOL a:block { return a }
+      / EOL 'else'i _ a:statement { return a }
+      / EOL 'else'i EOL a:block { return a }
             / EOL { return null }
 
 conditional = 'if'i _ e:expression c:consequent a:alternate?  {
-        	return {
-            	'conditional': {
-                	'condition' : e,
+          return {
+              'conditional': {
+                  'condition' : e,
                     'consequent' : c,
                     'alternate' : a
                 }
-           };
-       }
+            };
+        }
+
+loopable 	= _ s:statement { return s }
+      		/ EOL s:block EOL { return s }
+
+loop 	= 'while'i _ e:expression c:loopable
+          { return { 'while_loop': {
+            'condition': e,
+            'consequent': c
+         } }; }
+         /
+         'until'i _ e:expression c:loopable
+          { return { 'until_loop': {
+            'condition': e,
+            'consequent': c
+         } }; }
 
 output      = ('say'i/'shout'i/'whisper'i/'scream'i) _ e:expression
                 {return {'output': e}}
@@ -56,14 +71,12 @@ false 	= ('false'i / 'lies'i / 'wrong'i / 'no'i) { return { constant: false } }
 
 null 	= ('null'i / 'nothing'i / 'nowhere'i / 'nobody'i / 'empty'i / 'gone'i) { return { constant: null } }
 
-
-mysterious = 'mysterious'
-	{ return { constant: "mysterious" } }
+mysterious = 'mysterious'  { return { constant: "mysterious" } }
 
 number      = n:$('-'?[0-9]+ ('.' [0-9]+)?) '.'?
                 { return {number: parseFloat(n)} }
-			/
-            	n:$('.' [0-9]+)
+      /
+              n:$('.' [0-9]+)
                 { return {number: parseFloat(n) } }
 
 
@@ -71,10 +84,10 @@ string      = '"' s:$[^"]* '"'
                 { return {string: s}}
 
 expression = lhs:arithmetic _ c:comparator _ rhs:arithmetic
-	{
-    	return {
-        	comparison: {
-            	comparator: c,
+  {
+      return {
+          comparison: {
+              comparator: c,
                 lhs: lhs,
                 rhs: rhs
             }
@@ -89,10 +102,10 @@ great	= ('high'i / 'greater'i / 'big'i / 'strong'i)
 small	= ('low'i / 'small'i / 'weak'i)
 
 comparator 	= 	'is'i _ greater _ 'than'i { return 'gt' }
-    		/ 	'is'i _ smaller _ 'than'i { return 'lt' }
+        / 	'is'i _ smaller _ 'than'i { return 'lt' }
             /	'is'i _ 'as'i _ great _ 'as'i { return 'ge' }
             /	'is'i _ 'as'i _ small _ 'as'i { return 'le' }
-			/ 	'is'i { return 'eq' }
+      / 	'is'i { return 'eq' }
 
 arithmetic         = first:product rest:((add / subtract) product)+
                 { return rest.reduce(function(memo, curr) {
@@ -125,71 +138,72 @@ pronoun = pronoun:(
     { return { pronoun: pronoun.toLowerCase() } }
 
 lookup 	= v:variable
-	{ return { lookup: { variable: v } }; }
+  { return { lookup: { variable: v } }; }
 
 common_prefix = ( 'an'i / 'a'i / 'the'i / 'my'i / 'your'i)
 common_variable = prefix:common_prefix _+ name:$([A-Za-z]+)
-				{ return (prefix + '_' + name).toLowerCase() };
+        { return (prefix + '_' + name).toLowerCase() };
 
 assignment 	= v:variable ('\'s' / (_* ('=' / 'is 'i / 'was 'i / 'were 'i))) _* e:(literal / poetic_number)
-				{ return { assign: { variable: v, expression: e} }; }
+        { return { assign: { variable: v, expression: e} }; }
               /
               v:variable _+ 'says'i _+ e:poetic_string
-              	{ return { assign: { variable: v, expression: e} }; }
+                { return { assign: { variable: v, expression: e} }; }
               / 'put'i _+ e:expression _+ 'into'i _+ v:variable
-				{ return { assign: { variable: v, expression: e} }; }
+        { return { assign: { variable: v, expression: e} }; }
 
 poetic_string = s:$[^\n]*
-	{ return { string: s} }
+  { return { string: s} }
 
 poetic_number = poetic_digit_separator* n:poetic_digits poetic_digit_separator* d:poetic_decimal? poetic_digit_separator*
 
-	{ return { number: parseFloat(d?n+'.'+d:n)}}
+  { return { number: parseFloat(d?n+'.'+d:n)}}
 
 poetic_decimal = '.' poetic_decimal_digit_separator* d:poetic_decimal_digits poetic_decimal_digit_separator* {return d}
-				/
+        /
                 '.' poetic_decimal_digit_separator*
 
 poetic_digit_separator = ( _ / [0-9\',;:?!+_\-/] )
 
 poetic_digits =
-	poetic_digit_separator* head:poetic_digit poetic_digit_separator+ tail:poetic_digits
-    	{ return head + tail }
-	/
+  poetic_digit_separator* head:poetic_digit poetic_digit_separator+ tail:poetic_digits
+      { return head + tail }
+  /
     d: poetic_digit
-    	{ return d }
+      { return d }
 
 poetic_decimal_digit_separator = ( _ / poetic_digit_separator / '.')
 poetic_decimal_digits =
-	poetic_decimal_digit_separator* head:poetic_digit poetic_decimal_digit_separator+ tail:poetic_decimal_digits
-    	{ return head + tail }
-	/
+  poetic_decimal_digit_separator* head:poetic_digit poetic_decimal_digit_separator+ tail:poetic_decimal_digits
+      { return head + tail }
+  /
     d: poetic_digit
-    	{ return d }
+      { return d }
 
 poetic_digit = t:[A-Za-z']+
-	{ return (t.filter(c => /[A-Za-z]/.test(c)).length%10).toString()}
+  { return (t.filter(c => /[A-Za-z]/.test(c)).length%10).toString()}
 
 variable = common_variable / proper_variable / pronoun
 
 proper_noun = [A-Z][A-Za-z]*
 proper_variable = head:$(proper_noun (' ' $proper_noun)*)
-	{ return head.replace(/ /g, '_').toUpperCase()  }
+  { return head.replace(/ /g, '_').toUpperCase()  }
 
 crement = increment / decrement
 
-increment = 'build'i _+ v:variable _+ t:('up'i noise*)+
-	{ return {
-    	increment: {
-        	variable: v,
+increment = 'build'i _ v:variable _ t:('up'i noise*)+
+  { return {
+      increment: {
+          variable: v,
             multiple: t.length
         }
     }; }
 
-decrement = 'knock'i _+ v:variable _+ t:('down'i noise*)+
-	{ return {
-    	decrement: {
-        	variable: v,
+decrement = 'knock'i _ v:variable _ t:('down'i noise*)+
+  { return {
+      decrement: {
+          variable: v,
             multiple: t.length
         }
     }; }
+

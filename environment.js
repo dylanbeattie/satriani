@@ -110,9 +110,19 @@ Environment.prototype = {
                      return evaluate(expr.alternate, env);
                  }
                  return null;
+             case "while_loop":
+                 while(evaluate(expr.condition, env)) {
+                     evaluate(expr.consequent, env);
+                 }
+                 return;
+             case "until_loop":
+                 while(! evaluate(expr.condition, env)) {
+                     evaluate(expr.consequent, env);
+                 }
+                 return;
              case "comparison":
-                 let lhs = evaluate(expr.lhs);
-                 let rhs = evaluate(expr.rhs);
+                 let lhs = evaluate(expr.lhs, env);
+                 let rhs = evaluate(expr.rhs, env);
                  switch(expr.comparator) {
                      case "eq": return (lhs == rhs);
                      case "lt": return (lhs < rhs);

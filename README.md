@@ -1,6 +1,30 @@
-# satriani
-JS interpreter for Rockstar
+# Satriani
 
-Based on the recursive descent parser described at http://lisperator.net/pltut/
+Satriani is a JavaScript interpreter for the Rockstar programming language.
 
-Work in progress. \m/
+Satriani has been created to act as a reference implementation for managing changes to the Rockstar language specification.
+
+## How it works
+
+Satriani uses `pegjs`, a parser generator for JavaScript.
+
+The language grammar is defined in `rockstar.peg`.
+
+We use the `pegjs` command line to generate `rockstar.js`, which is the parser itself:
+
+```
+$ pegjs rockstar.peg
+```
+`rockstar.js` exports a function `parse(input, options)`, where `input` 
+is a string containing the source code of your Rockstar program and `options` is the 
+optional [pegjs parser options](https://pegjs.org/documentation#using-the-parser).
+
+`parse` will return an **abstract syntax tree** (AST) containing your program. The 
+AST is a JSON object representing your program as a tree of operations.
+
+
+
+
+
+
+

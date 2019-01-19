@@ -32,7 +32,7 @@ null 	= ('null'i / 'nothing'i / 'nowhere'i / 'nobody'i / 'empty'i / 'gone'i) { r
 mysterious = 'mysterious'
 	{ return { constant: "mysterious" } }
 
-number      = n:$('-'?[0-9]+ ('.' [0-9]+)?)
+number      = n:$('-'?[0-9]+ ('.' [0-9]+)?) '.'?
                 { return {number: parseFloat(n)} }
 
 string      = '"' s:$[^"]+ '"'
@@ -82,21 +82,33 @@ common_variable = prefix:common_prefix _+ name:$([A-Za-z]+)
 assignment 	= v:variable ('\'s' / (_* ('=' / 'is 'i / 'was 'i / 'were 'i))) _* e:literal
 				{ return { assign: { variable: v, expression: e} }; }
 
-word_break = (_ / [^\nA-Za-z])+
-word = [A-Za-z]+
+poetic_number = poetic_digit_separator* n:poetic_digits poetic_digit_separator* d:poetic_decimal? poetic_digit_separator*
 
-poetic_number = integral:poetic_digits decimal:poetic_decimal? word_break*
-	{
-    	return { 'number' : parseFloat(integral + (decimal ? '.' + decimal : '')) }
-	}
+	{ return { number: parseFloat(d?n+'.'+d:n)}}
 
-poetic_decimal = '.' _* d:poetic_digits { return d }
+poetic_decimal = '.' poetic_decimal_digit_separator* d:poetic_decimal_digits poetic_decimal_digit_separator* {return d}
+				/
+                '.' poetic_decimal_digit_separator*
 
-poetic_digits = head:poetic_digit word_break tail:poetic_digits
-	{ return head + tail }
-    / d:poetic_digit { return d}
+poetic_digit_separator = ( _ / [0-9\',;:?!+_\-/] )
 
-poetic_digit = word:[A-Za-z]+ { return (word.length%10).toString() }
+poetic_digits =
+	poetic_digit_separator* head:poetic_digit poetic_digit_separator+ tail:poetic_digits
+    	{ return head + tail }
+	/
+    d: poetic_digit
+    	{ return d }
+
+poetic_decimal_digit_separator = ( _ / poetic_digit_separator / '.')
+poetic_decimal_digits =
+	poetic_decimal_digit_separator* head:poetic_digit poetic_decimal_digit_separator+ tail:poetic_decimal_digits
+    	{ return head + tail }
+	/
+    d: poetic_digit
+    	{ return d }
+
+poetic_digit = t:[A-Za-z']+
+	{ return (t.filter(c => /[A-Za-z]/.test(c)).length%10).toString()}
 
 variable = common_variable / proper_variable
 

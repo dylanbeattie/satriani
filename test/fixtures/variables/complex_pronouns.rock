@@ -1,5 +1,0 @@
-say "Sadness"
-Tommy is 1
-Gina is 2
-Put Tommy without Gina into Sadness
-Say it (should print -1. 'it' will refer to Sadness because that was the most recent variable name)

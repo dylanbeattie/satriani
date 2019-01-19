@@ -44,9 +44,31 @@ string      = '"' s:$[^"]+ '"'
 
 blank_line  = _* {return {blank:  ''}}
 
-expression  = sum
+expression = lhs:arithmetic _ c:comparator _ rhs:arithmetic
+	{
+    	return {
+        	comparison: {
+            	comparator: c,
+                lhs: lhs,
+                rhs: rhs
+            }
+        };
+    }
+    /
+    arithmetic
 
-sum         = first:product rest:((add / subtract) product)+
+greater 	= ('higher'i /'greater'i / 'bigger'i / 'stronger'i)
+smaller	 	= ('lower'i /'less'i / 'smaller'i / 'weaker'i)
+great	    = ('high'i / 'greater'i / 'big'i / 'strong'i)
+small	    = ('low'i / 'small'i / 'weak'i)
+
+comparator 	= 	'is'i _ greater _ 'than'i { return 'gt' }
+    		/ 	'is'i _ smaller _ 'than'i { return 'lt' }
+            /	'as'i _ great _ 'as'i { return 'ge' }
+            /	'as'i _ small _ 'as'i { return 'le' }
+			/ 	'is'i { return 'eq' }
+
+arithmetic         = first:product rest:((add / subtract) product)+
                 { return rest.reduce(function(memo, curr) {
                       return { binary: { op: curr[0], left: memo, right: curr[1]} };
                 }, first); }

@@ -2,13 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8aad1e04-fa77-485a-8040-58eae540723e" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/excluded/divisionOperator.rock" beforeDir="false" afterPath="$PROJECT_DIR$/test/fixtures/operators/divisionOperator.rock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/excluded/divisionOperator.rock.out" beforeDir="false" afterPath="$PROJECT_DIR$/test/fixtures/operators/divisionOperator.rock.out" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/excluded/multiplicationOperator.rock" beforeDir="false" afterPath="$PROJECT_DIR$/test/fixtures/operators/multiplicationOperator.rock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/excluded/multiplicationOperator.rock.out" beforeDir="false" afterPath="$PROJECT_DIR$/test/fixtures/operators/multiplicationOperator.rock.out" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/excluded/subtractOperator.rock" beforeDir="false" afterPath="$PROJECT_DIR$/test/fixtures/operators/subtractOperator.rock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/excluded/subtractOperator.rock.out" beforeDir="false" afterPath="$PROJECT_DIR$/test/fixtures/operators/subtractOperator.rock.out" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rockstar.peg" beforeDir="false" afterPath="$PROJECT_DIR$/rockstar.peg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/excluded/poeticStrings.rock" beforeDir="false" afterPath="$PROJECT_DIR$/test/fixtures/variables/poeticStrings.rock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/excluded/poeticStrings.rock.out" beforeDir="false" afterPath="$PROJECT_DIR$/test/fixtures/variables/poeticStrings.rock.out" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -21,11 +17,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/rockstar.peg">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="320">
-              <caret line="20" column="52" selection-start-line="20" selection-start-column="52" selection-end-line="20" selection-end-column="52" />
+            <state relative-caret-position="-1720">
+              <caret line="20" column="52" lean-forward="true" selection-start-line="20" selection-start-column="52" selection-end-line="20" selection-end-column="52" />
             </state>
           </provider>
         </entry>
@@ -35,33 +31,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="110">
               <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test/fixtures/variables/proper_variables.rock">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="198">
-              <caret line="9" column="19" lean-forward="true" selection-start-line="9" selection-start-column="19" selection-end-line="9" selection-end-column="19" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test/fixtures/correct/poeticLiterals.rock">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="220">
-              <caret line="10" column="17" lean-forward="true" selection-start-line="10" selection-start-column="17" selection-end-line="10" selection-end-column="17" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test/failures/invalid_comments.rock.err">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="14" lean-forward="true" selection-start-column="14" selection-end-column="14" />
             </state>
           </provider>
         </entry>
@@ -93,11 +62,38 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/test/fixtures/operators/multiplicationOperator.rock.out">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="110">
               <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/test/excluded/andTest.rock">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="198">
+              <caret line="9" column="18" lean-forward="true" selection-end-line="15" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/test/excluded/umlauts.rock">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="242">
+              <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/test/fixtures/variables/poeticStrings.rock">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="242">
+              <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
             </state>
           </provider>
         </entry>
@@ -187,11 +183,11 @@
         <option value="$PROJECT_DIR$/example.rock" />
         <option value="$PROJECT_DIR$/test/failures/invalid_comments.rock.err" />
         <option value="$PROJECT_DIR$/test/fixtures/variables/proper_variables.rock" />
-        <option value="$PROJECT_DIR$/rockstar.peg" />
         <option value="$PROJECT_DIR$/test/fixtures/variables/complex_pronouns.rock" />
         <option value="$PROJECT_DIR$/environment.js" />
         <option value="$PROJECT_DIR$/test/fixtures/operators/multiplicationOperator.rock" />
         <option value="$PROJECT_DIR$/test/fixtures/operators/multiplicationOperator.rock.out" />
+        <option value="$PROJECT_DIR$/rockstar.peg" />
       </list>
     </option>
   </component>
@@ -237,7 +233,7 @@
               <item name="satriani" type="462c0819:PsiDirectoryNode" />
               <item name="test" type="462c0819:PsiDirectoryNode" />
               <item name="fixtures" type="462c0819:PsiDirectoryNode" />
-              <item name="operators" type="462c0819:PsiDirectoryNode" />
+              <item name="variables" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="satriani" type="b2602c69:ProjectViewProjectNode" />
@@ -265,11 +261,11 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/test/fixtures/operators" />
+      <recent name="$PROJECT_DIR$/test/fixtures/variables" />
       <recent name="$PROJECT_DIR$/test/excluded" />
+      <recent name="$PROJECT_DIR$/test/fixtures/operators" />
       <recent name="$PROJECT_DIR$/test/fixtures" />
       <recent name="$PROJECT_DIR$" />
-      <recent name="$PROJECT_DIR$/test/failures" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/test/fixtures/constants" />
@@ -391,7 +387,7 @@
       <workItem from="1547077822758" duration="3762000" />
       <workItem from="1547135669905" duration="9636000" />
       <workItem from="1547220868325" duration="1792000" />
-      <workItem from="1547891335464" duration="6167000" />
+      <workItem from="1547891335464" duration="6576000" />
     </task>
     <servers />
   </component>
@@ -428,7 +424,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="62791000" />
+    <option name="totallyTimeSpent" value="63200000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -466,9 +462,6 @@
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/test/excluded/simpleConditionals.rock">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/test/excluded/inputTest2.rock">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -502,9 +495,6 @@
     <entry file="file://$PROJECT_DIR$/test/excluded/truthinessTest.rock">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/test/excluded/umlauts.rock">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/test/fixtures/correct/pronouns.rock.out">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -528,9 +518,6 @@
           <caret line="19" lean-forward="true" selection-start-line="19" selection-end-line="19" />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/excluded/poeticStrings.rock">
-      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/test/excluded/fizzbuzz-idiomatic.rock">
       <provider selected="true" editor-type-id="text-editor">
@@ -678,13 +665,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/rockstar.peg">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="320">
-          <caret line="20" column="52" selection-start-line="20" selection-start-column="52" selection-end-line="20" selection-end-column="52" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/test/fixtures/variables/complex_pronouns.rock">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="110">
@@ -717,6 +697,34 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="110">
           <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/excluded/andTest.rock">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="9" column="18" lean-forward="true" selection-end-line="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/fixtures/variables/poeticStrings.rock">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="242">
+          <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/excluded/umlauts.rock">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="242">
+          <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/rockstar.peg">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1720">
+          <caret line="20" column="52" lean-forward="true" selection-start-line="20" selection-start-column="52" selection-end-line="20" selection-end-column="52" />
         </state>
       </provider>
     </entry>

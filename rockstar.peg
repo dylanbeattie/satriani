@@ -1,17 +1,23 @@
-program     = head:statement tail:((_* '\n') statement)*
-                {
-                return { program: [head].concat(tail.map(item => item[1]))
-                 }
-                }
+program     = p:statement *
+	{ return { program: p } }
 
 comment     = '(' [^)]* ')'
 
 _           = ((' ' / '\t')+) / comment
 
-statement   = _* s:(operation / blank_line)
+noise 	= (_ / [;,?!&])
+EOL = 	noise* '\n'
+
+statement   = _* s:(operation / blank_line) EOL
                 { return s }
 
-operation   = output / assignment / crement
+blank_line  = _* {return {blank:  ''}}
+
+operation   = output / assignment / crement / conditional
+
+conditional = 'if' _ e:expression _
+
+			/ 'else'
 
 output      = ('say'i/'shout'i/'whisper'i/'scream'i) _+ e:expression
                 {return {'output': e}}
@@ -41,8 +47,6 @@ number      = n:$('-'?[0-9]+ ('.' [0-9]+)?) '.'?
 
 string      = '"' s:$[^"]* '"'
                 { return {string: s}}
-
-blank_line  = _* {return {blank:  ''}}
 
 expression = lhs:arithmetic _ c:comparator _ rhs:arithmetic
 	{
@@ -152,9 +156,7 @@ proper_variable = head:$(proper_noun (' ' $proper_noun)*)
 
 crement = increment / decrement
 
-EOL = 	(_ / [;,?!&])+
-
-increment = 'build'i _+ v:variable _+ t:('up'i EOL*)+
+increment = 'build'i _+ v:variable _+ t:('up'i noise*)+
 	{ return {
     	increment: {
         	variable: v,
@@ -162,7 +164,7 @@ increment = 'build'i _+ v:variable _+ t:('up'i EOL*)+
         }
     }; }
 
-decrement = 'knock'i _+ v:variable _+ t:('down'i EOL*)+
+decrement = 'knock'i _+ v:variable _+ t:('down'i noise*)+
 	{ return {
     	decrement: {
         	variable: v,

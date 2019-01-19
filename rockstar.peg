@@ -11,7 +11,7 @@ _           = ((' ' / '\t')+) / comment
 statement   = _* s:(operation / blank_line)
                 { return s }
 
-operation   = output / assignment
+operation   = output / assignment / crement
 
 output      = ('say'i/'shout'i/'whisper'i/'scream'i) _+ e:expression
                 {return {'output': e}}
@@ -127,6 +127,28 @@ variable = common_variable / proper_variable / pronoun
 proper_noun = [A-Z][A-Za-z]*
 proper_variable = head:$(proper_noun (' ' $proper_noun)*)
 	{ return head.replace(/ /g, '_').toUpperCase()  }
+
+crement = increment / decrement
+
+EOL = 	(_ / [;,?!&])+
+
+increment = 'build'i _+ v:variable _+ t:('up'i EOL*)+
+	{ return {
+    	increment: {
+        	variable: v,
+            multiple: t.length
+        }
+    }; }
+
+decrement = 'knock'i _+ v:variable _+ t:('down'i EOL*)+
+	{ return {
+    	decrement: {
+        	variable: v,
+            multiple: t.length
+        }
+    }; }
+
+
 
 
 

@@ -46,7 +46,7 @@ Environment.prototype = {
 
  function evaluate(tree, env) {
      let pairs = Object.entries(tree);
-     for(let i = 0; i < pairs.length; i++) {
+     for (let i = 0; i < pairs.length; i++) {
          let token = pairs[i];
          let type = token[0];
          let expr = token[1];
@@ -82,6 +82,28 @@ Environment.prototype = {
                  return env.assign(alias, value);
              case "pronoun":
                  return env.pronoun_value;
+             case "blank":
+                 return;
+             case "increment":
+                 let old_increment_value = env.lookup(expr.variable);
+                 switch(typeof(old_increment_value)) {
+                     case "boolean":
+                         if (expr.multiple % 2 == 0) return;
+                         return env.assign(expr.variable, !old_increment_value);
+                     default:
+                         return env.assign(expr.variable, (old_increment_value + expr.multiple));
+                 }
+             case "decrement":
+                 let old_decrement_value = env.lookup(expr.variable);
+                 switch(typeof(old_decrement_value)) {
+                     case "boolean":
+                         if (expr.multiple % 2 == 0) return;
+                         return env.assign(expr.variable, !old_decrement_value);
+                     default:
+                         return env.assign(expr.variable, (old_decrement_value - expr.multiple));
+                 }
+             default:
+                 throw new Error("Sorry - I don't know how to evaluate this." + JSON.stringify(tree))
 
          }
      }

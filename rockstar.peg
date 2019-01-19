@@ -59,13 +59,13 @@ expression = lhs:arithmetic _ c:comparator _ rhs:arithmetic
 
 greater 	= ('higher'i /'greater'i / 'bigger'i / 'stronger'i)
 smaller	 	= ('lower'i /'less'i / 'smaller'i / 'weaker'i)
-great	    = ('high'i / 'greater'i / 'big'i / 'strong'i)
-small	    = ('low'i / 'small'i / 'weak'i)
+great	= ('high'i / 'greater'i / 'big'i / 'strong'i)
+small	= ('low'i / 'small'i / 'weak'i)
 
 comparator 	= 	'is'i _ greater _ 'than'i { return 'gt' }
     		/ 	'is'i _ smaller _ 'than'i { return 'lt' }
-            /	'as'i _ great _ 'as'i { return 'ge' }
-            /	'as'i _ small _ 'as'i { return 'le' }
+            /	'is'i _ 'as'i _ great _ 'as'i { return 'ge' }
+            /	'is'i _ 'as'i _ small _ 'as'i { return 'le' }
 			/ 	'is'i { return 'eq' }
 
 arithmetic         = first:product rest:((add / subtract) product)+

@@ -65,6 +65,7 @@ Environment.prototype = {
              case "binary":
                  return binary(expr, env);
              case "lookup":
+                 if (expr.variable.pronoun) return (env.pronoun_value);
                  env.pronoun_alias = expr.variable;
                  return env.pronoun_value = env.lookup(expr.variable);
              case "assign":

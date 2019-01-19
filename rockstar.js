@@ -789,11 +789,14 @@ function peg$parse(input, options) {
   function peg$parsesimple_expression() {
     var s0;
 
-    s0 = peg$parsepronoun();
+    s0 = peg$parseconstant();
     if (s0 === peg$FAILED) {
       s0 = peg$parselookup();
       if (s0 === peg$FAILED) {
         s0 = peg$parseliteral();
+        if (s0 === peg$FAILED) {
+          s0 = peg$parsepronoun();
+        }
       }
     }
 
@@ -803,11 +806,11 @@ function peg$parse(input, options) {
   function peg$parseliteral() {
     var s0;
 
-    s0 = peg$parsenumber();
+    s0 = peg$parseconstant();
     if (s0 === peg$FAILED) {
-      s0 = peg$parsestring();
+      s0 = peg$parsenumber();
       if (s0 === peg$FAILED) {
-        s0 = peg$parseconstant();
+        s0 = peg$parsestring();
         if (s0 === peg$FAILED) {
           s0 = peg$parsepoetic_number();
         }

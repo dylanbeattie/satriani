@@ -16,9 +16,9 @@ operation   = output / assignment / expression
 output      = ('say'i/'shout'i/'whisper'i/'scream'i) _+ e:expression
                 {return {'output': e}}
 
-simple_expression  =    pronoun / lookup / literal
+simple_expression  =   constant / lookup / literal / pronoun
 
-literal = number / string / constant / poetic_number
+literal = constant / number / string / poetic_number
 
 constant = null / true / false / mysterious
 
@@ -37,6 +37,7 @@ number      = n:$('-'?[0-9]+ ('.' [0-9]+)?) '.'?
 			/
             	n:$('.' [0-9]+)
                 { return {number: parseFloat(n) } }
+
 
 string      = '"' s:$[^"]+ '"'
                 { return {string: s}}

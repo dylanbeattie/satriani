@@ -5,13 +5,13 @@ module.exports = {
 function Environment(parent) {
     this.vars = Object.create(parent ? parent.vars : null);
     this.parent = parent;
-    this.output = console.log;
+    this.output = (parent && parent.output ? parent.output : console.log);
 
 }
 
 Environment.prototype = {
     extend: function () { return new Environment(this) },
-    bovril: function (name) {
+    find_scope: function (name) {
         let scope = this;
         while (scope) {
             if (Object.prototype.hasOwnProperty.call(scope.vars, name)) return scope;
@@ -26,10 +26,9 @@ Environment.prototype = {
     },
 
     assign: function (name, value) {
-        let scope = this.bovril(name);
-        // let's not allow defining globals from a nested environment
-        if (!scope && this.parent)
-            throw new Error("Undefined variable " + name);
+        // THIS is where we control whether assignment inside a function call
+        // can overwrite variables declared in a parent frame.
+        let scope = this.find_scope(name);
         return (scope || this).vars[name] = value;
     },
 
@@ -53,8 +52,10 @@ Environment.prototype = {
          switch (type) {
              case "sequence":
                  let result = false;
-                 expr.forEach(e => result = evaluate(e, env));
-                 return result;
+                 for(let i = 0; i < expr.length; i++) {
+                     if (result = evaluate(expr[i], env)) return(result);
+                 }
+                 return null;
              case "number":
              case "string":
              case "constant":
@@ -73,13 +74,13 @@ Environment.prototype = {
                  let value = evaluate(expr.expression, env);
                  if (expr.variable.pronoun) {
                      alias = env.pronoun_alias;
-                     console.debug('Assigning to ' + alias + ' via pronoun');
                  } else {
                      alias = expr.variable;
                      env.pronoun_alias = alias;
                      env.pronoun_value = value;
                  }
-                 return env.assign(alias, value);
+                 env.assign(alias, value);
+                 return;
              case "pronoun":
                  return env.pronoun_value;
              case "blank":
@@ -88,28 +89,31 @@ Environment.prototype = {
                  let old_increment_value = env.lookup(expr.variable);
                  switch(typeof(old_increment_value)) {
                      case "boolean":
-                         if (expr.multiple % 2 == 0) return;
-                         return env.assign(expr.variable, !old_increment_value);
+                         if (expr.multiple % 2 != 0) env.assign(expr.variable, !old_increment_value);
+                         return;
                      default:
-                         return env.assign(expr.variable, (old_increment_value + expr.multiple));
+                         env.assign(expr.variable, (old_increment_value + expr.multiple));
+                         return;
                  }
+                 return;
              case "decrement":
                  let old_decrement_value = env.lookup(expr.variable);
                  switch(typeof(old_decrement_value)) {
                      case "boolean":
-                         if (expr.multiple % 2 == 0) return;
-                         return env.assign(expr.variable, !old_decrement_value);
+                         if (expr.multiple % 2 != 0) env.assign(expr.variable, !old_decrement_value);
+                         return;
                      default:
-                         return env.assign(expr.variable, (old_decrement_value - expr.multiple));
+                         env.assign(expr.variable, (old_decrement_value - expr.multiple));
+                         return;
                  }
+                 return;
              case "conditional":
-
                  if(evaluate(expr.condition, env)) {
                      return evaluate(expr.consequent, env)
                  } else if (expr.alternate) {
                      return evaluate(expr.alternate, env);
                  }
-                 return null;
+                 return;
              case "while_loop":
                  while(evaluate(expr.condition, env)) {
                      evaluate(expr.consequent, env);
@@ -136,11 +140,31 @@ Environment.prototype = {
                  return (evaluate(expr.lhs, env) || evaluate(expr.rhs, env));
              case "not":
                  return(! evaluate(expr.expression, env));
+             case "function":
+                 var lambda = make_lambda(expr, env);
+                 env.assign(expr.name, lambda);
+                 return;
+             case "call":
+                 let func = env.lookup(expr.name);
+                 return func.apply(null, expr.args.map(arg => evaluate(arg, env)));
+             case "return":
+                 return evaluate(expr.expression, env);
              default:
                  throw new Error("Sorry - I don't know how to evaluate this: " + JSON.stringify(tree))
 
          }
      }
+ }
+
+ function make_lambda(expr, env) {
+    function lambda() {
+        let names = expr.args;
+        if (names.length != arguments.length) throw('Wrong number of arguments supplied to function ' + expr.name + ' (' + expr.args + ')');
+        let scope = env.extend();
+        for(let i = 0; i < names.length; ++i) scope.def(names[i], arguments[i])
+        return evaluate(expr.body, scope);
+    }
+    return lambda;
  }
 
  function binary(b, env) {

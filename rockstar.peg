@@ -4,7 +4,7 @@ line = _* s:statement EOL+ { return s }
   /
     EOL { return null }
 
-whitespace = [' \t']
+whitespace  = [ \t]
 comment     = '(' [^)]* ')'
 _           = (whitespace / comment)+
 
@@ -20,7 +20,9 @@ function = name:variable _ 'takes'i _ args:arg_list EOL body:block
         body: body
     } } }
 
-arg_list = head:variable (_'and'_ / _?','_?) tail:arg_list
+arg_separator = (_? ',' _ 'and' _ / _'and'_ / _?('&' / ',' / "'n'")_?)
+
+arg_list = head:variable arg_separator tail:arg_list
 	{ return [head].concat(tail) }
     /
     arg:variable { return [arg] }
@@ -28,7 +30,7 @@ arg_list = head:variable (_'and'_ / _?','_?) tail:arg_list
 function_call = name:variable _ 'taking'i _ args:call_args
 	{ return { 'call': { name: name, args: args } } }
 
-call_args = head:simple_expression (_'and'_ / _? ',' _?) tail:call_args
+call_args = head:simple_expression arg_separator tail:call_args
 	{ return [head].concat(tail) }
     /
     arg:simple_expression { return [arg] }
@@ -232,7 +234,7 @@ poetic_digit = t:[A-Za-z']+
   { return (t.filter(c => /[A-Za-z]/.test(c)).length%10).toString()}
 
 variable = common_variable / proper_variable / pronoun
-keyword = 'if'i / 'takes'i / 'taking'i
+keyword = 'if'i / 'takes'i / 'taking'i / 'say'i
 
 proper_noun = !keyword [A-Z][A-Za-z]*
 proper_variable = head:$(proper_noun (' ' $proper_noun)*)

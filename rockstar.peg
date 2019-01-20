@@ -20,7 +20,7 @@ function = name:variable _ 'takes'i _ args:arg_list EOL body:block
         body: body
     } } }
 
-arg_separator = (_? ',' _ 'and' _ / _'and'_ / _?('&' / ',' / "'n'")_?)
+arg_separator = (_? ', and' _ / _?('&' / ',' / "'n'")_?)
 
 arg_list = head:variable arg_separator tail:arg_list
 	{ return [head].concat(tail) }
@@ -234,7 +234,8 @@ poetic_digit = t:[A-Za-z']+
   { return (t.filter(c => /[A-Za-z]/.test(c)).length%10).toString()}
 
 variable = common_variable / proper_variable / pronoun
-keyword = 'if'i / 'takes'i / 'taking'i / 'say'i
+
+keyword = ('if'i / 'takes'i / 'taking'i / 'say'i) ![A-Za-z]
 
 proper_noun = !keyword [A-Z][A-Za-z]*
 proper_variable = head:$(proper_noun (' ' $proper_noun)*)

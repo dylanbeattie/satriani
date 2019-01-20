@@ -6,14 +6,14 @@ Echo taking "hello world"
 put 5 into Temp
 Echo taking Temp
 
-AddAndPrint takes X and Y
+AddAndPrint takes X, and Y
 put X plus Y into Value
 say Value
 Give back Value
 (end function)
 say AddAndPrint taking 3, 4
 
-AddOrSub takes X and B
+AddOrSub takes X, and B
 if B
 Give Back X plus 1
 (end if)

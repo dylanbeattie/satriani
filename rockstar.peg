@@ -97,7 +97,7 @@ false 	= ('false'i / 'lies'i / 'wrong'i / 'no'i) { return { constant: false } }
 
 null 	= ('null'i / 'nothing'i / 'nowhere'i / 'nobody'i / 'empty'i / 'gone'i) { return { constant: null } }
 
-mysterious = 'mysterious'  { return { constant: "mysterious" } }
+mysterious = 'mysterious'  { return '__MYSTERIOUS__' }
 
 number      = n:$('-'?[0-9]+ ('.' [0-9]+)?) '.'?
                 { return {number: parseFloat(n)} }
@@ -121,19 +121,35 @@ or = lhs:and _ 'or' _ rhs:or {
  }
  /and
 
-and = lhs:not _ 'and' _ rhs:and {
+and = lhs:equality_check _ 'and' _ rhs:and {
 	return { 'and': {
         lhs: lhs,
         rhs: rhs
     } }
  }
  /
- not
+ equality_check
 
- not = 'not' _ e:comparison { return { 'not': { expression: e} } }
+eq = ('aint'i / 'ain\'t'i) { return 'ne' }
+     / 	'is'i { return 'eq' }
+
+equality_check = lhs:not _ c:eq _ rhs:equality_check
+	{
+      return {
+          comparison: {
+              comparator: c,
+                lhs: lhs,
+                rhs: rhs
+            }
+        };
+    }
+	/
+    not
+
+ not = 'not' _ e:not { return { 'not': { expression: e} } }
  	/ comparison
 
-comparison = lhs:arithmetic _ c:comparator _ rhs:arithmetic
+comparison = lhs:arithmetic _ c:comparator _ rhs:comparison
   {
       return {
           comparison: {
@@ -152,10 +168,10 @@ great	= ('high'i / 'greater'i / 'big'i / 'strong'i)
 small	= ('low'i / 'small'i / 'weak'i)
 
 comparator 	= 	'is'i _ greater _ 'than'i { return 'gt' }
-        / 	'is'i _ smaller _ 'than'i { return 'lt' }
+            / 	'is'i _ smaller _ 'than'i { return 'lt' }
             /	'is'i _ 'as'i _ great _ 'as'i { return 'ge' }
             /	'is'i _ 'as'i _ small _ 'as'i { return 'le' }
-      / 	'is'i { return 'eq' }
+
 
 arithmetic         = first:product rest:((add / subtract) product)+
                 { return rest.reduce(function(memo, curr) {

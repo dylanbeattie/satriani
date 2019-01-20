@@ -2,6 +2,8 @@ module.exports = {
     Environment: Environment
 }
 
+const MYSTERIOUS = '__MYSTERIOUS__';
+
 function Environment(parent) {
     this.vars = Object.create(parent ? parent.vars : null);
     this.parent = parent;
@@ -44,6 +46,7 @@ Environment.prototype = {
 }
 
  function evaluate(tree, env) {
+    if (tree == MYSTERIOUS) return undefined;
      let pairs = Object.entries(tree);
      for (let i = 0; i < pairs.length; i++) {
          let token = pairs[i];
@@ -61,7 +64,9 @@ Environment.prototype = {
              case "constant":
                  return (expr);
              case "output":
-                 env.output(evaluate(expr, env));
+                 let printable = evaluate(expr, env);
+                 if (typeof(printable) == 'undefined') printable = "mysterious";
+                 env.output(printable);
                  return null;
              case "binary":
                  return binary(expr, env);
@@ -127,12 +132,19 @@ Environment.prototype = {
              case "comparison":
                  let lhs = evaluate(expr.lhs, env);
                  let rhs = evaluate(expr.rhs, env);
-                 switch(expr.comparator) {
-                     case "eq": return (lhs == rhs);
-                     case "lt": return (lhs < rhs);
-                     case "le": return (lhs <= rhs);
-                     case "ge": return (lhs >= rhs);
-                     case "gt": return(lhs > rhs);
+                 switch (expr.comparator) {
+                     case "eq":
+                         return (lhs == rhs);
+                     case "lt":
+                         return (lhs < rhs);
+                     case "le":
+                         return (lhs <= rhs);
+                     case "ge":
+                         return (lhs >= rhs);
+                     case "gt":
+                         return (lhs > rhs);
+                     case "ne":
+                         return (lhs != rhs);
                  }
              case "and":
                  return (evaluate(expr.lhs, env) && evaluate(expr.rhs, env));

@@ -22,8 +22,3 @@ say true plus ", you are."
 (string + null)
 say null plus " and void"
 say "void and " plus nothing
-
-(string + mysterious)
-say "you are very " plus mysterious
-say mysterious plus ", huh?"
-

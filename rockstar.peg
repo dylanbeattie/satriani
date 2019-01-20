@@ -11,7 +11,31 @@ _           = (whitespace / comment)+
 noise 	= (_ / [;,?!&.])
 EOL = 	noise* '\n'
 
-statement   = loop / conditional / operation
+statement   = function / function_call / function_return / loop / conditional / operation
+
+function = name:variable _ 'takes'i _ args:arg_list EOL body:block
+	{ return { 'function': {
+    	name: name,
+        args: args.map(arg => arg),
+        body: body
+    } } }
+
+arg_list = head:variable (_'and'_ / _?','_?) tail:arg_list
+	{ return [head].concat(tail) }
+    /
+    arg:variable { return [arg] }
+
+function_call = name:variable _ 'taking'i _ args:call_args
+	{ return { 'call': { name: name, args: args } } }
+
+call_args = head:simple_expression (_'and'_ / _? ',' _?) tail:call_args
+	{ return [head].concat(tail) }
+    /
+    arg:simple_expression { return [arg] }
+
+return = 'return'i / 'give back'i
+function_return = return _ e:expression
+	{ return { 'return': { 'expression' : e } } }
 
 operation   = output / crement / assignment
 
@@ -19,7 +43,7 @@ continuation = EOL _* s:statement { return s };
 
 block 	= head:statement tail:(continuation)+
     {
-          return { sequence: Array(head).concat(tail) }
+          return { sequence: [head].concat(tail) }
         }
     / s:statement { return s }
 
@@ -59,7 +83,7 @@ loop 	= 'while'i _ e:expression c:loopable
 output      = ('say'i/'shout'i/'whisper'i/'scream'i) _ e:expression
                 {return {'output': e}}
 
-simple_expression  =   constant / lookup / literal / pronoun
+simple_expression  =   function_call / constant / lookup / literal / pronoun
 
 literal = constant / number / string
 
@@ -208,8 +232,9 @@ poetic_digit = t:[A-Za-z']+
   { return (t.filter(c => /[A-Za-z]/.test(c)).length%10).toString()}
 
 variable = common_variable / proper_variable / pronoun
+keyword = 'if'i / 'takes'i / 'taking'i
 
-proper_noun = [A-Z][A-Za-z]*
+proper_noun = !keyword [A-Z][A-Za-z]*
 proper_variable = head:$(proper_noun (' ' $proper_noun)*)
   { return head.replace(/ /g, '_').toUpperCase()  }
 

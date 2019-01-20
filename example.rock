@@ -1,8 +1,9 @@
+Sum takes X, Y and Z
+Give back X + Y + Z
 
-if false
-say "hello"
-say "world"
-else
-say "goodbye"
-say "everyone"
-(end block)
+If Sum taking 2, 3, 4 is higher than 9
+Say "Yeah!"
+
+Say Sum taking 8, 9 and 10
+
+

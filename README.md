@@ -24,6 +24,8 @@ AST is a JSON object representing your program as a tree of operations.
 
 ## Acknowledgements
 
+I've basically had to teach myself how to build compilers again to create this - it's been a long, long time since University... :)
+
 HUGE thanks to Wolfgang Faust for https://github.com/wolfgang42/rockstar-js - I've been using his grammar
 as a reference throughout and have reused bits of it directly, and it's been invaluable.
 

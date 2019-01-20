@@ -1,7 +1,15 @@
+say "true" is true
+say "yes" is true
+say "OK" is true
+say ""
 say true is "true"
 say true is "RIGht"
+say "yes" is true
+say "OK" is true
 say false is "false"
 say false is "WROng"
+say "lies" is false
+say ""
 say true is "hello"
 say "true" is true
 say ""

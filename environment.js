@@ -1,5 +1,6 @@
 module.exports = {
-    Environment: Environment
+    Environment: Environment,
+    eq: eq
 }
 
 const MYSTERIOUS = '__MYSTERIOUS__';
@@ -46,7 +47,7 @@ Environment.prototype = {
 }
 
  function evaluate(tree, env) {
-    if (tree == MYSTERIOUS) return undefined;
+     if (tree == MYSTERIOUS) return undefined;
      let pairs = Object.entries(tree);
      for (let i = 0; i < pairs.length; i++) {
          let token = pairs[i];
@@ -55,8 +56,8 @@ Environment.prototype = {
          switch (type) {
              case "sequence":
                  let result = false;
-                 for(let i = 0; i < expr.length; i++) {
-                     if (result = evaluate(expr[i], env)) return(result);
+                 for (let i = 0; i < expr.length; i++) {
+                     if (result = evaluate(expr[i], env)) return (result);
                  }
                  return null;
              case "number":
@@ -65,7 +66,7 @@ Environment.prototype = {
                  return (expr);
              case "output":
                  let printable = evaluate(expr, env);
-                 if (typeof(printable) == 'undefined') printable = "mysterious";
+                 if (typeof (printable) == 'undefined') printable = "mysterious";
                  env.output(printable);
                  return null;
              case "binary":
@@ -92,7 +93,7 @@ Environment.prototype = {
                  return;
              case "increment":
                  let old_increment_value = env.lookup(expr.variable);
-                 switch(typeof(old_increment_value)) {
+                 switch (typeof (old_increment_value)) {
                      case "boolean":
                          if (expr.multiple % 2 != 0) env.assign(expr.variable, !old_increment_value);
                          return;
@@ -103,7 +104,7 @@ Environment.prototype = {
                  return;
              case "decrement":
                  let old_decrement_value = env.lookup(expr.variable);
-                 switch(typeof(old_decrement_value)) {
+                 switch (typeof (old_decrement_value)) {
                      case "boolean":
                          if (expr.multiple % 2 != 0) env.assign(expr.variable, !old_decrement_value);
                          return;
@@ -113,19 +114,19 @@ Environment.prototype = {
                  }
                  return;
              case "conditional":
-                 if(evaluate(expr.condition, env)) {
+                 if (evaluate(expr.condition, env)) {
                      return evaluate(expr.consequent, env)
                  } else if (expr.alternate) {
                      return evaluate(expr.alternate, env);
                  }
                  return;
              case "while_loop":
-                 while(evaluate(expr.condition, env)) {
+                 while (evaluate(expr.condition, env)) {
                      evaluate(expr.consequent, env);
                  }
                  return;
              case "until_loop":
-                 while(! evaluate(expr.condition, env)) {
+                 while (!evaluate(expr.condition, env)) {
                      evaluate(expr.consequent, env);
                  }
                  return;
@@ -134,7 +135,9 @@ Environment.prototype = {
                  let rhs = evaluate(expr.rhs, env);
                  switch (expr.comparator) {
                      case "eq":
-                         return (lhs == rhs);
+                         return eq(lhs, rhs);
+                     case "ne":
+                         return ! eq(lhs, rhs);
                      case "lt":
                          return (lhs < rhs);
                      case "le":
@@ -143,18 +146,15 @@ Environment.prototype = {
                          return (lhs >= rhs);
                      case "gt":
                          return (lhs > rhs);
-                     case "ne":
-                         return (lhs != rhs);
                  }
              case "and":
                  return (evaluate(expr.lhs, env) && evaluate(expr.rhs, env));
              case "or":
                  return (evaluate(expr.lhs, env) || evaluate(expr.rhs, env));
              case "not":
-                 return(! evaluate(expr.expression, env));
+                 return (!evaluate(expr.expression, env));
              case "function":
-                 var lambda = make_lambda(expr, env);
-                 env.assign(expr.name, lambda);
+                 env.assign(expr.name, make_lambda(expr, env));
                  return;
              case "call":
                  let func = env.lookup(expr.name);
@@ -168,108 +168,55 @@ Environment.prototype = {
      }
  }
 
+ function eq(lhs, rhs) {
+     if (typeof(lhs) == 'undefined') return(typeof(rhs) == 'undefined');
+     if (typeof(rhs) == 'undefined') return(typeof(lhs) == 'undefined');
+
+     if (typeof(lhs) == 'boolean') return(eq_boolean(lhs, rhs));
+     if (typeof(rhs) == 'boolean') return(eq_boolean(rhs, lhs));
+     if (typeof(lhs) == 'number') return(eq_number(lhs, rhs));
+     if (typeof(rhs) == 'number') return(eq_number(rhs, lhs));
+
+    return lhs == rhs;
+ }
+
+ function eq_number(number, other) {
+    if (other == null || number === 0 || typeof(other) == 'undefined') return(number === 0);
+    return(other == number);
+ }
+
+ function eq_boolean(bool, other) {
+    // false equals null in Rockstar
+    if (other == null) other = false;
+    // false equals zero in Rockstar
+    if(typeof(other) == 'number') other = (other !== 0);
+    if (typeof(other) == 'string') other = (other !== "");
+    return (bool == other);
+ }
+
  function make_lambda(expr, env) {
-    function lambda() {
-        let names = expr.args;
-        if (names.length != arguments.length) throw('Wrong number of arguments supplied to function ' + expr.name + ' (' + expr.args + ')');
-        let scope = env.extend();
-        for(let i = 0; i < names.length; ++i) scope.def(names[i], arguments[i])
-        return evaluate(expr.body, scope);
-    }
-    return lambda;
+     function lambda() {
+         let names = expr.args;
+         if (names.length != arguments.length) throw('Wrong number of arguments supplied to function ' + expr.name + ' (' + expr.args + ')');
+         let scope = env.extend();
+         for (let i = 0; i < names.length; ++i) scope.def(names[i], arguments[i])
+         return evaluate(expr.body, scope);
+     }
+
+     return lambda;
  }
 
  function binary(b, env) {
-    let l = evaluate(b.left, env);
-    let r  = evaluate(b.right, env);
-    switch(b.op) {
-        case '+': return l + r;
-        case '-': return l - r;
-        case '/': return l / r;
-        case '*': return l * r;
-        // case "-": return num(a) - num(b);
-        // case "*": return num(a) * num(b);
-        // case "/": return num(a) / div(b);
-        // case "%": return num(a) % div(b);
-        // case "&&": return a !== false && b;
-        // case "||": return a !== false ? a : b;
-        // case "<": return num(a) < num(b);
-        // case ">": return num(a) > num(b);
-        // case "<=": return num(a) <= num(b);
-        // case ">=": return num(a) >= num(b);
-        // case "==": return a === b;
-        // case "!=": return a !== b;
-        //
-    }
+     let l = evaluate(b.left, env);
+     let r = evaluate(b.right, env);
+     switch (b.op) {
+         case '+':
+             return l + r;
+         case '-':
+             return l - r;
+         case '/':
+             return l / r;
+         case '*':
+             return l * r;
+     }
  }
-// function ope() {
-//     Object.entries(pair).forEach(token => {
-//         var type = token[0];
-//         var expr = token[1];
-//         console.log('Type ' + type + ', expr' + JSON.stringify(expr));
-//          console.log(JSON.stringify(token));
-//          switch(type) {
-//              case "program":
-//
-//                  console.log(token[1]);
-//                  let status = false;
-//                  token[1].forEach(function (p2) {
-//                      status = evaluate(Object.entries(p2), env)
-//                  });
-//                  return status;
-//              case "number":
-//              case "string":
-//                  return token[1];
-//              case "output":
-//                  let result = evaluate(token[1], env);
-//                  env.output(result);
-//                  return;
-//          }
-//     });
-// }
-//
- //     switch (pair[0]) {
- //         // case "var":
- //         //     return env.get(exp.value);
- //         // case "assign":
- //         //     if (exp.left.type != "var")
- //         //         throw new Error("Cannot assign to " + JSON.stringify(exp.left));
- //         //     return env.set(exp.left.value, evaluate(exp.right, env));
- //         // case "binary":
- //         //     return apply_op(exp.operator,
- //         //         evaluate(exp.left, env),
- //         //         evaluate(exp.right, env));
- //
- //         default:
- //             throw('Cannot evaluate ' + JSON.stringify(key) + ' with value ' + JSON.stringify(value));;
- //     }
- // }
-//
-// function apply_op(op, a, b) {
-//     function num(x) {
-//         if (typeof x != "number")
-//             throw new Error("Expected number but got " + x);
-//         return x;
-//     }
-//     function div(x) {
-//         if (num(x) == 0)
-//             throw new Error("Divide by zero");
-//         return x;
-//     }
-//     switch (op) {
-//         case "+": return num(a) + num(b);
-//         case "-": return num(a) - num(b);
-//         case "*": return num(a) * num(b);
-//         case "/": return num(a) / div(b);
-//         case "%": return num(a) % div(b);
-//         case "&&": return a !== false && b;
-//         case "||": return a !== false ? a : b;
-//         case "<": return num(a) < num(b);
-//         case ">": return num(a) > num(b);
-//         case "<=": return num(a) <= num(b);
-//         case ">=": return num(a) >= num(b);
-//         case "==": return a === b;
-//         case "!=": return a !== b;
-//     }
-//     throw new Error("Can't apply operator " + op);
-// }

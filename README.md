@@ -22,6 +22,15 @@ optional [pegjs parser options](https://pegjs.org/documentation#using-the-parser
 `parse` will return an **abstract syntax tree** (AST) containing your program. The 
 AST is a JSON object representing your program as a tree of operations.
 
+## Acknowledgements
+
+HUGE thanks to Wolfgang Faust for https://github.com/wolfgang42/rockstar-js - I've been using his grammar
+as a reference throughout and have reused bits of it directly, and it's been invaluable.
+
+Mihai Bazon's fantastic series of articles on building recursive descent compilers in JavaScript has also been
+realy useful: http://lisperator.net/pltut/
+
+
 
 
 

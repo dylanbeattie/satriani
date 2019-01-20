@@ -1,0 +1,12 @@
+
+say true is null
+say false is null
+say null is null
+say ""
+say ""
+say true is not false
+say true is not true
+say true ain't false
+say true ain't true
+say true aint false
+say true aint true

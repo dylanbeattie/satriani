@@ -1,0 +1,19 @@
+say true is "true"
+say true is "RIGht"
+say false is "false"
+say false is "WROng"
+say true is "hello"
+say "true" is true
+say ""
+say 5 is "3"
+say 5 is "hello"
+say ""
+say true is "lies"
+say "lies" is true
+say false is "true"
+say false is "hello"
+say "false" is false
+say "true" is false
+say ""
+say "hello" is "hello"
+say "hello" is "world"

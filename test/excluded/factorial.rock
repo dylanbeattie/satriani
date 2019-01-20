@@ -6,5 +6,4 @@ put X minus 1 into NewX
 Give back X times Factorial taking NewX
 (end if)
 (end func)
-say Factorial taking 4
-say Factorial taking 10
+say Factorial taking 0

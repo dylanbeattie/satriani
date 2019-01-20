@@ -8,7 +8,7 @@ say 5 is 5.0
 say 0.26 is 0.26
 say "5" is 5
 say 5 is "05.0"
-
+say ""
 say true is 0
 say 0 is true
 say 1 is false

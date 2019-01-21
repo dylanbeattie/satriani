@@ -9,7 +9,7 @@ function Environment(parent) {
     this.vars = Object.create(parent ? parent.vars : null);
     this.parent = parent;
     this.output = (parent && parent.output ? parent.output : console.log);
-
+    this.readline = () => "";
 }
 
 Environment.prototype = {
@@ -70,6 +70,8 @@ Environment.prototype = {
                  if (typeof (printable) == 'undefined') printable = "mysterious";
                  env.output(printable);
                  return;
+             case "listen":
+                 return env.readline();
              case "binary":
                  return binary(expr, env);
              case "lookup":

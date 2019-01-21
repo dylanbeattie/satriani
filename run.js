@@ -1,6 +1,10 @@
 const fs = require('fs');
 const rockstar = require('./rockstar.js');
 const environment = require('./environment.js');
+var readlineSync = require('readline-sync');
+var foo = readlineSync.question();
+console.log(foo);
+console.log(foo);
 
 var sourceFilePath = process.argv[2];
 fs.readFile(sourceFilePath, 'utf8', (err, data) => {;
@@ -11,6 +15,8 @@ fs.readFile(sourceFilePath, 'utf8', (err, data) => {;
         console.log('---------------------------------------------------');
 
         let env = new environment.Environment();
+        env.readline = readlineSync.question;
+
         // env.output = (...args) => console.log(args);
         env.run(program);
         // console.log(JSON.stringify(tree,null,2));

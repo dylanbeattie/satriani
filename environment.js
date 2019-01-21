@@ -57,9 +57,10 @@ Environment.prototype = {
              case "sequence":
                  let result = false;
                  for (let i = 0; i < expr.length; i++) {
-                     if (result = evaluate(expr[i], env)) return (result);
+                     result = evaluate(expr[i], env);
+                     if (typeof(result) != 'undefined') return(result);
                  }
-                 return null;
+                 return;
              case "number":
              case "string":
              case "constant":
@@ -68,7 +69,7 @@ Environment.prototype = {
                  let printable = evaluate(expr, env);
                  if (typeof (printable) == 'undefined') printable = "mysterious";
                  env.output(printable);
-                 return null;
+                 return;
              case "binary":
                  return binary(expr, env);
              case "lookup":

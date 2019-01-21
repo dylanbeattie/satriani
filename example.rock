@@ -1,1 +1,12 @@
-say mysterious
+Fib takes N
+if N is smaller than 2
+give back N
+say "if we see this it's fooked"
+(end if)
+put N without 1 into OneBefore
+put N without 2 into TwoBefore
+Say "OneBefore " + OneBefore
+Say "TwoBefore " + TwoBefore
+give back Fib taking OneBefore plus Fib taking TwoBefore
+(end fib)
+say Fib taking 20

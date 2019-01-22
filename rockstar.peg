@@ -11,7 +11,7 @@ _           = (whitespace / comment)+
 noise 	= (_ / [;,?!&.])
 EOL = 	noise* '\n'
 
-statement   = function / function_call / function_return / loop / conditional / operation
+statement   = function / function_call / function_return / loop / conditional / operation / expression
 
 function = name:variable _ 'takes'i _ args:arg_list EOL body:block
 	{ return { 'function': {
@@ -39,7 +39,10 @@ return = 'return'i / 'give back'i
 function_return = return _ e:expression
 	{ return { 'return': { 'expression' : e } } }
 
-operation   = output / crement / assignment
+operation   = readline / output / crement / assignment
+
+readline = 'listen to'i _ v:variable  { return { 'assign': { 'expression': 'listen', 'variable': v } } }
+		 / 'listen'i { return { 'listen' : null } }
 
 continuation = EOL _* s:statement { return s };
 
@@ -47,7 +50,7 @@ block 	= head:statement tail:(continuation)+
     {
           return { sequence: [head].concat(tail) }
         }
-    / s:statement { return s }
+    / s:statement { return { sequence: [s] } }
 
 consequent 	= _ s:statement { return s }
       / EOL s:block { return s }
@@ -164,7 +167,7 @@ comparison = lhs:arithmetic _ c:comparator _ rhs:comparison
 
 greater 	= ('higher'i /'greater'i / 'bigger'i / 'stronger'i)
 smaller	 	= ('lower'i /'less'i / 'smaller'i / 'weaker'i)
-great	= ('high'i / 'great'i / 'big'i / 'strong'i)
+great	= ('high'i / 'greater'i / 'big'i / 'strong'i)
 small	= ('low'i / 'small'i / 'weak'i)
 
 comparator 	= 	'is'i _ greater _ 'than'i { return 'gt' }
@@ -251,7 +254,7 @@ poetic_digit = t:[A-Za-z']+
 
 variable = common_variable / proper_variable / pronoun
 
-keyword = ('if'i / 'takes'i / 'taking'i / 'say'i / 'put'i / 'break'i) ![A-Za-z]
+keyword = ('if'i / 'takes'i / 'taking'i / 'say'i) ![A-Za-z]
 
 proper_noun = !keyword [A-Z][A-Za-z]*
 proper_variable = head:$(proper_noun (' ' $proper_noun)*)

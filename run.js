@@ -2,9 +2,6 @@ const fs = require('fs');
 const rockstar = require('./rockstar.js');
 const environment = require('./environment.js');
 var readlineSync = require('readline-sync');
-var foo = readlineSync.question();
-console.log(foo);
-console.log(foo);
 
 var sourceFilePath = process.argv[2];
 fs.readFile(sourceFilePath, 'utf8', (err, data) => {;

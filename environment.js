@@ -49,16 +49,22 @@ Environment.prototype = {
  function evaluate(tree, env) {
      if (tree == MYSTERIOUS) return undefined;
      let pairs = Object.entries(tree);
+     for(let j = 0; j < pairs.length; j++) {
+         console.log(JSON.stringify(pairs[j]));
+     }
      for (let i = 0; i < pairs.length; i++) {
          let token = pairs[i];
          let type = token[0];
          let expr = token[1];
          switch (type) {
              case "sequence":
-                 let result = false;
+                 let result = null;
                  for (let i = 0; i < expr.length; i++) {
-                     result = evaluate(expr[i], env);
-                     if (typeof(result) != 'undefined') return(result);
+                     console.log();
+                     let next = expr[i];
+                     result = evaluate(next, env);
+                     console.log(JSON.stringify(result));
+                     if (typeof(next.__RETURN__) != 'undefined') return result;
                  }
                  return;
              case "number":
@@ -71,6 +77,9 @@ Environment.prototype = {
                  env.output(printable);
                  return;
              case "listen":
+                 if (expr.target) {
+
+                 }
                  return env.readline();
              case "binary":
                  return binary(expr, env);
@@ -163,7 +172,7 @@ Environment.prototype = {
                  let func = env.lookup(expr.name);
                  return func.apply(null, expr.args.map(arg => evaluate(arg, env)));
              case "return":
-                 return evaluate(expr.expression, env);
+                 return { __RETURN__ : evaluate(expr.expression, env) };
              default:
                  throw new Error("Sorry - I don't know how to evaluate this: " + JSON.stringify(tree))
 

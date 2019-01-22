@@ -183,10 +183,10 @@ function peg$parse(input, options) {
       peg$c35 = function(e) { return { 'return': { 'expression' : e } } },
       peg$c36 = "listen to",
       peg$c37 = peg$literalExpectation("listen to", true),
-      peg$c38 = function(v) { return { 'assign': { 'expression': 'listen', 'variable': v } } },
+      peg$c38 = function(v) { return { 'assign': { 'expression': { 'listen' : ''}, 'variable': v } } },
       peg$c39 = "listen",
       peg$c40 = peg$literalExpectation("listen", true),
-      peg$c41 = function() { return { 'listen' : null } },
+      peg$c41 = function() { return { 'listen' : ''} },
       peg$c42 = function(head, tail) {
                 return { list : [head].concat(tail) }
               },
@@ -4186,6 +4186,24 @@ function peg$parse(input, options) {
           } else {
             s1 = peg$FAILED;
             if (peg$silentFails === 0) { peg$fail(peg$c56); }
+          }
+          if (s1 === peg$FAILED) {
+            if (input.substr(peg$currPos, 3).toLowerCase() === peg$c251) {
+              s1 = input.substr(peg$currPos, 3);
+              peg$currPos += 3;
+            } else {
+              s1 = peg$FAILED;
+              if (peg$silentFails === 0) { peg$fail(peg$c252); }
+            }
+            if (s1 === peg$FAILED) {
+              if (input.substr(peg$currPos, 4).toLowerCase() === peg$c43) {
+                s1 = input.substr(peg$currPos, 4);
+                peg$currPos += 4;
+              } else {
+                s1 = peg$FAILED;
+                if (peg$silentFails === 0) { peg$fail(peg$c44); }
+              }
+            }
           }
         }
       }

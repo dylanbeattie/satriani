@@ -46,10 +46,6 @@ Environment.prototype = {
     pronoun_value: null,
 }
 
-/* Right, some thoughts:
-
-    If anything in a sequence evaluates to
- */
  function evaluate(tree, env, flag) {
      if (tree == MYSTERIOUS) return(undefined);
      let list = Object.entries(tree)
@@ -92,9 +88,6 @@ Environment.prototype = {
                  env.output(printable);
                  return;
              case "listen":
-                 if (expr.target) {
-
-                 }
                  return env.readline();
              case "binary":
                  return binary(expr, env);

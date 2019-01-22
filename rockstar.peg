@@ -41,8 +41,9 @@ function_return = return _ e:expression
 
 operation   = readline / output / crement / assignment
 
-readline = 'listen to'i _ v:variable  { return { 'assign': { 'expression': 'listen', 'variable': v } } }
-		 / 'listen'i { return { 'listen' : null } }
+
+readline = 'listen to'i _ v:variable  { return { 'assign': { 'expression': { 'listen' : ''}, 'variable': v } } }
+		 / 'listen'i { return { 'listen' : ''} }
 
 continuation = EOL _* s:statement { return s };
 
@@ -254,7 +255,7 @@ poetic_digit = t:[A-Za-z']+
 
 variable = common_variable / proper_variable / pronoun
 
-keyword = ('if'i / 'takes'i / 'taking'i / 'say'i) ![A-Za-z]
+keyword = ('if'i / 'takes'i / 'taking'i / 'say'i / 'put'i / 'else'i) ![A-Za-z]
 
 proper_noun = !keyword [A-Z][A-Za-z]*
 proper_variable = head:$(proper_noun (' ' $proper_noun)*)

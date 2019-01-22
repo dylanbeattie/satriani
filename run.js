@@ -15,7 +15,7 @@ fs.readFile(sourceFilePath, 'utf8', (err, data) => {;
         env.readline = readlineSync.question;
 
         // env.output = (...args) => console.log(args);
-        env.run(program);
+        console.log(env.run(program));
         // console.log(JSON.stringify(tree,null,2));
     } catch (e) {
         if (e.location && e.location.start) {

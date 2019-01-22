@@ -1,4 +1,4 @@
-program     = p:line * { return { sequence: p.filter(item => item) } }
+program     = p:line * { return { list: p.filter(item => item) } }
 
 line = _* s:statement EOL+ { return s }
   /
@@ -48,9 +48,9 @@ continuation = EOL _* s:statement { return s };
 
 block 	= head:statement tail:(continuation)+
     {
-          return { sequence: [head].concat(tail) }
+          return { list : [head].concat(tail) }
         }
-    / s:statement { return { sequence: [s] } }
+    / s:statement { return s }
 
 consequent 	= _ s:statement { return s }
       / EOL s:block { return s }

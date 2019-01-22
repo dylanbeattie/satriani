@@ -1,9 +1,2 @@
-AddOrSub takes X, and B
-if B
-Give Back X plus 1
-(end if)
-say "else"
-Give Back X minus 1
-(end function)
-say AddOrSub taking 4, true
-say AddOrSub taking 4, false
+1 plus 2
+3 plus 5

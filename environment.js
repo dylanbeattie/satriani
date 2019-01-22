@@ -46,33 +46,48 @@ Environment.prototype = {
     pronoun_value: null,
 }
 
- function evaluate(tree, env) {
-     if (tree == MYSTERIOUS) return undefined;
-     let pairs = Object.entries(tree);
-     for(let j = 0; j < pairs.length; j++) {
-         console.log(JSON.stringify(pairs[j]));
-     }
-     for (let i = 0; i < pairs.length; i++) {
-         let token = pairs[i];
-         let type = token[0];
-         let expr = token[1];
+/* Right, some thoughts:
+
+    If anything in a sequence evaluates to
+ */
+ function evaluate(tree, env, flag) {
+     if (tree == MYSTERIOUS) return(undefined);
+     let list = Object.entries(tree)
+     for (let i = 0; i < list.length; i++) {
+         let node = list[i];
+         let type = node[0];
+         let expr = node[1];
          switch (type) {
-             case "sequence":
+             case "list":
                  let result = null;
                  for (let i = 0; i < expr.length; i++) {
-                     console.log();
                      let next = expr[i];
-                     result = evaluate(next, env);
-                     console.log(JSON.stringify(result));
-                     if (typeof(next.__RETURN__) != 'undefined') return result;
+                     result = evaluate(next, env, true);
+                     if (result) switch(result.action) {
+                         case 'return':
+                             return (result.value);
+                     }
                  }
                  return;
+             case "conditional":
+                 if (evaluate(expr.condition, env)) {
+                     return evaluate(expr.consequent, env, flag)
+                 } else if (expr.alternate) {
+                     return evaluate(expr.alternate, env, flag);
+                 }
+                 return;
+             case "return":
+                 if (flag) return {
+                     'action': 'return',
+                     'value': evaluate(expr.expression, env, flag)
+                 };
+                 return evaluate(expr.expression, env, flag);
              case "number":
              case "string":
              case "constant":
                  return (expr);
              case "output":
-                 let printable = evaluate(expr, env);
+                 let printable = evaluate(expr, env, flag);
                  if (typeof (printable) == 'undefined') printable = "mysterious";
                  env.output(printable);
                  return;
@@ -125,31 +140,25 @@ Environment.prototype = {
                          return;
                  }
                  return;
-             case "conditional":
-                 if (evaluate(expr.condition, env)) {
-                     return evaluate(expr.consequent, env)
-                 } else if (expr.alternate) {
-                     return evaluate(expr.alternate, env);
-                 }
-                 return;
+
              case "while_loop":
-                 while (evaluate(expr.condition, env)) {
-                     evaluate(expr.consequent, env);
+                 while (evaluate(expr.condition, env, flag)) {
+                     evaluate(expr.consequent, env, flag);
                  }
                  return;
              case "until_loop":
-                 while (!evaluate(expr.condition, env)) {
-                     evaluate(expr.consequent, env);
+                 while (!evaluate(expr.condition, env, flag)) {
+                     evaluate(expr.consequent, env, flag);
                  }
                  return;
              case "comparison":
-                 let lhs = evaluate(expr.lhs, env);
-                 let rhs = evaluate(expr.rhs, env);
+                 let lhs = evaluate(expr.lhs, env, flag);
+                 let rhs = evaluate(expr.rhs, env, flag);
                  switch (expr.comparator) {
                      case "eq":
                          return eq(lhs, rhs);
                      case "ne":
-                         return ! eq(lhs, rhs);
+                         return !eq(lhs, rhs);
                      case "lt":
                          return (lhs < rhs);
                      case "le":
@@ -160,19 +169,17 @@ Environment.prototype = {
                          return (lhs > rhs);
                  }
              case "and":
-                 return (evaluate(expr.lhs, env) && evaluate(expr.rhs, env));
+                 return (evaluate(expr.lhs, env, flag) && evaluate(expr.rhs, env, flag));
              case "or":
-                 return (evaluate(expr.lhs, env) || evaluate(expr.rhs, env));
+                 return (evaluate(expr.lhs, env, flag) || evaluate(expr.rhs, env, flag));
              case "not":
-                 return (!evaluate(expr.expression, env));
+                 return (!evaluate(expr.expression, env, flag));
              case "function":
-                 env.assign(expr.name, make_lambda(expr, env));
+                 env.assign(expr.name, make_lambda(expr, env, flag));
                  return;
              case "call":
                  let func = env.lookup(expr.name);
-                 return func.apply(null, expr.args.map(arg => evaluate(arg, env)));
-             case "return":
-                 return { __RETURN__ : evaluate(expr.expression, env) };
+                 return func.apply(null, expr.args.map(arg => evaluate(arg, env, flag)));
              default:
                  throw new Error("Sorry - I don't know how to evaluate this: " + JSON.stringify(tree))
 

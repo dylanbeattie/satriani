@@ -163,6 +163,8 @@ Environment.prototype = {
                  }
              case "and":
                  return (evaluate(expr.lhs, env, flag) && evaluate(expr.rhs, env, flag));
+             case "nor":
+                 return (!evaluate(expr.lhs, env, flag) && !evaluate(expr.rhs, env, flag));
              case "or":
                  return (evaluate(expr.lhs, env, flag) || evaluate(expr.rhs, env, flag));
              case "not":

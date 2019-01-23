@@ -115,7 +115,11 @@ string      = '"' s:$[^"]* '"'
 
 expression = boolean
 
-boolean = or
+boolean = nor
+
+nor = lhs:or _ 'nor' _ rhs:nor {
+	return { 'nor' : { lhs: lhs, rhs: rhs } } }
+	/ or
 
 or = lhs:and _ 'or' _ rhs:or {
 	return { 'or': {
@@ -211,7 +215,13 @@ lookup 	= v:variable
   { return { lookup: { variable: v } }; }
 
 common_prefix = ( 'an'i / 'a'i / 'the'i / 'my'i / 'your'i)
-common_variable = prefix:common_prefix _+ name:$([A-Za-z]+)
+
+uppercase_letter = [A-ZÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝÞĀĂĄĆĈĊČĎĐĒĔĖĘĚĜĞĠĢĤĦĨĪĬĮİĲĴĶĸĹĻĽĿŁŃŅŇŊŌŎŐŒŔŖŘŚŜŞŠŢŤŦŨŪŬŮŰŲŴŶŸŹŻŽ]
+lowercase_letter = [a-zàáâãäåæçèéêëìíîïðñòóôõöøùúûüýþāăąćĉċčďđēĕėęěĝğġģĥħĩīĭįıĳĵķĸĺļľŀłńņňŋōŏőœŕŗřśŝşšţťŧũūŭůűųŵŷÿźżžŉß]
+
+letter = uppercase_letter / lowercase_letter
+
+common_variable = prefix:common_prefix _+ name:$(letter+)
         { return (prefix + '_' + name).toLowerCase() };
 
 assignment 	= v:variable ('\'s' / (_* ('=' / 'is 'i / 'was 'i / 'were 'i))) _* e:(literal / poetic_number)
@@ -257,7 +267,7 @@ variable = common_variable / proper_variable / pronoun
 
 keyword = ('if'i / 'takes'i / 'taking'i / 'say'i / 'put'i / 'else'i) ![A-Za-z]
 
-proper_noun = !keyword [A-Z][A-Za-z]*
+proper_noun = !keyword uppercase_letter letter*
 proper_variable = head:$(proper_noun (' ' $proper_noun)*)
   { return head.replace(/ /g, '_').toUpperCase()  }
 

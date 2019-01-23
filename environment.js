@@ -60,6 +60,12 @@ Environment.prototype = {
                      let next = expr[i];
                      result = evaluate(next, env, true);
                      if (result) switch(result.action) {
+                         case 'break':
+                             console.log('break from list');
+                             break;
+                         case 'continue':
+                             console.log('continue from list');
+                             continue;
                          case 'return':
                              return (result.value);
                      }
@@ -71,6 +77,15 @@ Environment.prototype = {
                  } else if (expr.alternate) {
                      return evaluate(expr.alternate, env, flag);
                  }
+                 return;
+             case 'break':
+                 if (flag) {
+                     console.log('BREAK');
+                     return { 'action' : 'break' };
+                 }
+                 return;
+             case 'continue':
+                 if (flag) return { 'action' : 'continue' };
                  return;
              case "return":
                  if (flag) return {
@@ -136,12 +151,26 @@ Environment.prototype = {
 
              case "while_loop":
                  while (evaluate(expr.condition, env, flag)) {
-                     evaluate(expr.consequent, env, flag);
+                     let result = evaluate(expr.consequent, env, flag);
+                     if (result) switch (result.action) {
+                         case 'continue':
+                             continue;
+                         case 'break':
+                         case 'return':
+                             return (result);
+                     }
                  }
                  return;
              case "until_loop":
                  while (!evaluate(expr.condition, env, flag)) {
-                     evaluate(expr.consequent, env, flag);
+                     let result = evaluate(expr.consequent, env, flag);
+                     if (result) switch(result.action) {
+                         case 'continue':
+                             continue;
+                         case 'break':
+                         case 'return':
+                             return (result);
+                     }
                  }
                  return;
              case "comparison":
@@ -195,7 +224,7 @@ Environment.prototype = {
  }
 
  function eq_number(number, other) {
-    if (other == null || number === 0 || typeof(other) == 'undefined') return(number === 0);
+    if (other == null || typeof(other) == 'undefined') return(number === 0);
     return(other == number);
  }
 

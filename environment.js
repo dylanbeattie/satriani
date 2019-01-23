@@ -56,16 +56,16 @@ Environment.prototype = {
          switch (type) {
              case "list":
                  let result = null;
-                 for (let i = 0; i < expr.length; i++) {
+                 main: for (let i = 0; i < expr.length; i++) {
                      let next = expr[i];
                      result = evaluate(next, env, true);
                      if (result) switch(result.action) {
                          case 'break':
                              console.log('break from list');
-                             break;
+                             break main;
                          case 'continue':
                              console.log('continue from list');
-                             continue;
+                             continue main;
                          case 'return':
                              return (result.value);
                      }
@@ -150,24 +150,28 @@ Environment.prototype = {
                  return;
 
              case "while_loop":
-                 while (evaluate(expr.condition, env, flag)) {
+                 while_outer: while (evaluate(expr.condition, env, flag)) {
                      let result = evaluate(expr.consequent, env, flag);
-                     if (result) switch (result.action) {
+                     console.log(JSON.stringify(result));
+                     if (result) switch(result.action) {
                          case 'continue':
-                             continue;
+                             continue while_outer;
                          case 'break':
+                             break while_outer;
                          case 'return':
                              return (result);
                      }
                  }
                  return;
              case "until_loop":
-                 while (!evaluate(expr.condition, env, flag)) {
+                 until_outer: while (!evaluate(expr.condition, env, flag)) {
                      let result = evaluate(expr.consequent, env, flag);
+                     console.log(JSON.stringify(result));
                      if (result) switch(result.action) {
                          case 'continue':
-                             continue;
+                             continue until_outer;
                          case 'break':
+                             break until_outer;
                          case 'return':
                              return (result);
                      }

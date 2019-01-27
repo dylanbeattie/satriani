@@ -1,6 +1,6 @@
 {
   "name": "satriani",
-  "version": "1.0.0",
+  "version": "0.9.0",
   "description": "JS interpreter for Rockstar",
   "main": "satriani.js",
   "directories": {
@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "chai": "^4.2.0",
+    "gh-pages": "^2.0.1",
     "pegjs": "^0.10.0",
     "readline-sync": "^1.4.9"
   },
@@ -15,7 +16,8 @@
     "mocha": "^5.2.0"
   },
   "scripts": {
-    "browserify": "browserify --standalone Satriani satriani.js -o satriani-bundle.js",
+    "browserify": "browserify --standalone Satriani satriani.js -o js/satriani-browser.js",
+    "deploy": "./deploy.sh",
     "serve": "python -m SimpleHTTPServer 8000",
     "test": "pegjs rockstar.peg; mocha test/*.js"
   },

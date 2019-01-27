@@ -63,3 +63,12 @@ jobs:
     steps:
       - run: yarn browserify
       - run: yarn deploy
+
+workflows:
+  version: 2
+    build_test_and_deploy:
+      jobs:
+        - build
+        - test
+        - deploy
+      

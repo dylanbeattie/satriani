@@ -39,9 +39,11 @@ function execute(source, inputs) {
 
 function execute_and_compare_output(file) {
     let source = fs.readFileSync(file, 'utf8');
+    let inputsFile = file + '.in';
+    let inputs = (fs.existsSync(inputsFile) ? fs.readFileSync(inputsFile, 'utf8').split(/\n/g) : '');
     let targetFile = file + '.out';
     let target = fs.existsSync(targetFile) ? fs.readFileSync(targetFile, 'utf8') : '';
-    let actual = execute(source);
+    let actual = execute(source, inputs);
     assert.equal(actual, target);
 }
 

@@ -1,4 +1,4 @@
-program     = p:line * { return { sequence: p.filter(item => item) } }
+program     = p:line * { return { list: p.filter(item => item) } }
 
 line = _* s:statement EOL+ { return s }
   /
@@ -11,7 +11,18 @@ _           = (whitespace / comment)+
 noise 	= (_ / [;,?!&.])
 EOL = 	noise* '\n'
 
-statement   = function / function_call / function_return / loop / conditional / operation
+ignore_rest_of_line = (_[^\n]*)?
+
+statement   = break / continue / function / function_call
+			/ function_return / loop / conditional / operation / expression
+
+break = 'break'i ignore_rest_of_line {
+	return { 'break' : {} }
+}
+
+continue = ('continue'i ignore_rest_of_line / 'take it to the top'i) {
+	return { 'continue' : {} }
+}
 
 function = name:variable _ 'takes'i _ args:arg_list EOL body:block
 	{ return { 'function': {
@@ -39,13 +50,17 @@ return = 'return'i / 'give back'i
 function_return = return _ e:expression
 	{ return { 'return': { 'expression' : e } } }
 
-operation   = output / crement / assignment
+operation   = readline / output / crement / assignment
+
+
+readline = 'listen to'i _ v:variable  { return { 'assign': { 'expression': { 'listen' : ''}, 'variable': v } } }
+		 / 'listen'i { return { 'listen' : ''} }
 
 continuation = EOL _* s:statement { return s };
 
 block 	= head:statement tail:(continuation)+
     {
-          return { sequence: [head].concat(tail) }
+          return { list : [head].concat(tail) }
         }
     / s:statement { return s }
 
@@ -111,7 +126,11 @@ string      = '"' s:$[^"]* '"'
 
 expression = boolean
 
-boolean = or
+boolean = nor
+
+nor = lhs:or _ 'nor' _ rhs:nor {
+	return { 'nor' : { lhs: lhs, rhs: rhs } } }
+	/ or
 
 or = lhs:and _ 'or' _ rhs:or {
 	return { 'or': {
@@ -164,7 +183,7 @@ comparison = lhs:arithmetic _ c:comparator _ rhs:comparison
 
 greater 	= ('higher'i /'greater'i / 'bigger'i / 'stronger'i)
 smaller	 	= ('lower'i /'less'i / 'smaller'i / 'weaker'i)
-great	= ('high'i / 'great'i / 'big'i / 'strong'i)
+great	= ('high'i / 'greater'i / 'big'i / 'strong'i)
 small	= ('low'i / 'small'i / 'weak'i)
 
 comparator 	= 	'is'i _ greater _ 'than'i { return 'gt' }
@@ -207,7 +226,13 @@ lookup 	= v:variable
   { return { lookup: { variable: v } }; }
 
 common_prefix = ( 'an'i / 'a'i / 'the'i / 'my'i / 'your'i)
-common_variable = prefix:common_prefix _+ name:$([A-Za-z]+)
+
+uppercase_letter = [A-ZÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝÞĀĂĄĆĈĊČĎĐĒĔĖĘĚĜĞĠĢĤĦĨĪĬĮİĲĴĶĸĹĻĽĿŁŃŅŇŊŌŎŐŒŔŖŘŚŜŞŠŢŤŦŨŪŬŮŰŲŴŶŸŹŻŽ]
+lowercase_letter = [a-zàáâãäåæçèéêëìíîïðñòóôõöøùúûüýþāăąćĉċčďđēĕėęěĝğġģĥħĩīĭįıĳĵķĸĺļľŀłńņňŋōŏőœŕŗřśŝşšţťŧũūŭůűųŵŷÿźżžŉß]
+
+letter = uppercase_letter / lowercase_letter
+
+common_variable = prefix:common_prefix _+ name:$(letter+)
         { return (prefix + '_' + name).toLowerCase() };
 
 assignment 	= v:variable ('\'s' / (_* ('=' / 'is 'i / 'was 'i / 'were 'i))) _* e:(literal / poetic_number)
@@ -251,9 +276,9 @@ poetic_digit = t:[A-Za-z']+
 
 variable = common_variable / proper_variable / pronoun
 
-keyword = ('if'i / 'takes'i / 'taking'i / 'say'i / 'put'i / 'break'i) ![A-Za-z]
+keyword = ('if'i / 'takes'i / 'taking'i / 'say'i / 'put'i / 'else'i) ![A-Za-z]
 
-proper_noun = !keyword [A-Z][A-Za-z]*
+proper_noun = !keyword uppercase_letter letter*
 proper_variable = head:$(proper_noun (' ' $proper_noun)*)
   { return head.replace(/ /g, '_').toUpperCase()  }
 
